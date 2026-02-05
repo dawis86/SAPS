@@ -1,0 +1,19 @@
+﻿﻿Programma "Klientu Reģistrs"
+Versija: 1.0
+Izstrādātājs: Dāvis Strazds, e-pasts: davisstrazds@gmail.com, mob.: 26482667
+
+APRAKSTS
+
+"Klientu Reģistrs" ir visaptveroša darbvirsmas lietojumprogramma, kas izstrādāta sociālās aprūpes centru (SAC) vajadzībām. Tā nodrošina centralizētu, drošu un efektīvu klientu datu pārvaldību, automatizējot ikdienas procesus un piedāvājot jaudīgus analītiskos rīkus.
+
+GALVENĀS FUNKCIJAS
+
+1.  **Klientu Datu Pārvaldība**: Pilna cikla klientu uzskaite no iestāšanās līdz aiziešanai, ieskaitot personas datus, kontaktinformāciju, dokumentu termiņus un aprūpes vēsturi.
+2.  **Sociālās Aprūpes un Rehabilitācijas Plānošana**: Strukturēta rīkkopa individuālo plānu izveidei, rediģēšanai un eksportam.
+3.  **Nodarbību Reģistrācija**: Vienkāršots process individuālo un grupu nodarbību reģistrēšanai, balstoties uz iepriekš definētām aktivitātēm.
+4.  **Medicīnas Datu Pārvaldība**: Veselības karšu uzturēšana, medikamentu pasūtījumu veidošana un veidlapu sagatavošana slimnīcai.
+5.  **Statistika un Atskaites**: Interaktīvi un vizuāli paneļi, kas ļauj analizēt klientu demogrāfiju, kustības dinamiku, nodarbību popularitāti un citus svarīgus darbības rādītājus (KPI).
+6.  **Drošība un Administrēšana**: Daudzlīmeņu drošības sistēma ar administratora un lietotāja lomām, paroļu pārvaldība, datubāzes rezerves kopēšana un sistēmas audita žurnāls.
+7.  **Datu Imports/Eksports**: Elastīgas iespējas datu apmaiņai ar Excel (.xlsx) un citiem formātiem, nodrošinot savietojamību ar citām sistēmām.
+
+Mērķis ir nodrošināt sociālās aprūpes speciālistiem modernu, uzticamu un viegli lietojamu rīku, kas samazina administratīvo slogu un ļauj vairāk laika veltīt tiešajam darbam ar klientiem.
