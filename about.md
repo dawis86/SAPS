@@ -46,3 +46,4 @@ Analytics for Specialists: Automatic generation of statistics on client movement
 
 🏗️ Architecture as a Security Guarantee
 The chosen tech stack (Java 21, JavaFX, and local MySQL) is intentional. In social work, data is highly sensitive. The local desktop architecture ensures that personal identification data and social histories never physically leave the institution, guaranteeing 100% GDPR compliance and independence from internet connectivity.
+
