@@ -1,209 +1,205 @@
-# Sociālās aprūpes iestāžu pārvaldības sistēma (SAPS)
-### Social Care Institution Management System
-
-[Latviešu 🇱🇻](#latviešu) | [English 🇬🇧](#english)
-
----
+Sociālās aprūpes iestāžu pārvaldības sistēma (SAPS)
+Social Care Institution Management System
+Latviešu 🇱🇻 | English 🇬🇧
 
 <a name="latviešu"></a>
-## 🇱🇻 Latviešu
 
-======================================================================
+🇱🇻 Latviešu
 PROGRAMMATŪRA "Sociālās aprūpes iestāžu pārvaldības sistēma"
-======================================================================
+Versija: 2.0.0
 
-**Versija:** 2.0.0
-**Tips:** Darbvirsmas (Desktop) lietojumprogramma sociālās aprūpes centriem (SAC).
+Tips: Darbvirsmas (Desktop) lietojumprogramma sociālās aprūpes centriem (SAC).
 
-Projekts "Sociālās aprūpes iestāžu pārvaldības sistēma" ir specializēta sistēma, kas izstrādāta, lai digitalizēt un automatizēt klientu datu pārvaldību, samazinot administratīvo slogu un nodrošinot datu integritāti. Sistēma nodrošina pilnu klienta lietas dzīves cikla pārvaldību – no uzņemšanas līdz izrakstīšanai.
+Projekts "Sociālās aprūpes iestāžu pārvaldības sistēma" ir specializēta sistēma, kas izstrādāta, lai digitalizētu un automatizētu klientu datu pārvaldību, samazinot administratīvo slogu un nodrošinot datu integritāti. Sistēma nodrošina pilnu klienta lietas dzīves cikla pārvaldību – no uzņemšanas līdz izrakstīšanai.
 
 Projekts balstīts uz 13+ gadu praktisku pieredzi sociālajā darbā un atbilst MK noteikumiem Nr. 138 un Nr. 291.
 
----
-
-## 1. FUNKCIONALITĀTE
-
+1. FUNKCIONALITĀTE
 Sistēma aptver šādas funkcionālās jomas:
 
-### 🏠 Sākuma Panelis (Dashboard)
+🏠 Sākuma Panelis (Dashboard)
 
-- **Operatīvā informācija:** Tuvākās dzimšanas dienas, klientu skaits (kopā/jauni/aizgājuši).
-- **Brīdinājumi:** Dokumentu termiņi (beidzies/tuvojas) un nepieciešamās izvērtēšanas.
+Operatīvā informācija: Tuvākās dzimšanas dienas, klientu skaits (kopā/jauni/aizgājuši).
 
-### 📇 Klientu Pārvaldība
+Brīdinājumi: Dokumentu termiņi (beidzies/tuvojas) un nepieciešamās izvērtēšanas.
 
-- **Reģistrs:** Jauna klienta izveide ar unikālu PK pārbaudi un dublikātu kontroli.
-- **Klienta karte:** Pamatdati, sociālā anamnēze, novērtēšana (bāzes/dinamikas), piederīgie, dokumentu termiņi.
-- **Statusa kontrole:** Dzīves cikla pārvaldība (Aktīvs -> Izrakstīts -> Miris).
+📇 Klientu Pārvaldība
 
-### 📝 Plānošana un Dokumentācija
+Reģistrs: Jauna klienta izveide ar unikālu PK pārbaudi un dublikātu kontroli.
 
-- **Aprūpes un Rehabilitācijas plāni:** Strukturēta plānu izstrāde un mērķu definēšana.
-- **Protokoli:** Sociālās rehabilitācijas protokolu un sarunu aprakstu veidošana.
-- **Excel ģenerēšana:** Automātiska dokumentu (plānu, slimnīcas pavadrakstu) eksportēšana uz `.xlsx` veidnēm.
-- **Audits:** Automātiska visu darbību fiksēšana audita žurnālā.
+Klienta karte: Pamatdati, sociālā anamnēze, novērtēšana (bāzes/dinamikas), piederīgie, dokumentu termiņi.
 
-### 💊 Medicīna un Veselība
+Statusa kontrole: Dzīves cikla pārvaldība (Aktīvs -> Izrakstīts -> Miris).
 
-- **Veselības karte:** Diagnozes (MK10), ārstējošie ārsti, anamnēze.
-- **Medikamentu centrs:** Zāļu saraksta sastādīšana, pasūtījumu vēsture un eksports.
+📝 Plānošana un Dokumentācija
 
-### 📊 Statistika un Analītika
+Aprūpes un Rehabilitācijas plāni: Strukturēta plānu izstrāde un mērķu definēšana.
 
-- **Datu vizualizācija:** Demogrāfija, klientu kustība, aprūpes līmeņi, uzturēšanās ilgums.
-- **Nodarbību žurnāls:** Aktivitāšu uzskaite un speciālistu noslodzes analīze.
+Protokoli: Sociālās rehabilitācijas protokolu un sarunu aprakstu veidošana.
 
----
+Excel ģenerēšana: Automātiska dokumentu (plānu, slimnīcas pavadrakstu) eksportēšana uz .xlsx veidnēm.
 
-## 2. TEHNOLOĢISKAIS NODROŠINĀJUMS
+Audits: Automātiska visu darbību fiksēšana audita žurnālā.
 
-- **Valoda:** Java 21 (LTS)
-- **GUI:** JavaFX 21 (FXML + CSS)
-- **Datu bāze:** MySQL 8.0+
-- **Būvēšana:** Apache Maven
-- **Galvenās bibliotēkas:**
-  - `HikariCP` (JDBC Connection Pooling)
-  - `Apache POI` (Excel ģenerēšana)
-  - `ControlsFX` (Paplašinātas UI komponentes)
-  - `BCrypt/PBKDF2` (Drošība)
-  - `Logback` (Žurnālieraksti)
+💊 Medicīna un Veselība
 
----
+Veselības karte: Diagnozes (MK10), ārstējošie ārsti, anamnēze.
 
-## 3. ARHITEKTŪRA
+Medikamentu centrs: Zāļu saraksta sastādīšana, pasūtījumu vēsture un eksports.
 
+📊 Statistika un Analītika
+
+Datu vizualizācija: Demogrāfija, klientu kustība, aprūpes līmeņi, uzturēšanās ilgums.
+
+Nodarbību žurnāls: Aktivitāšu uzskaite un speciālistu noslodzes analīze.
+
+2. TEHNOLOĢISKAIS NODROŠINĀJUMS
+Valoda: Java 21 (LTS)
+
+GUI: JavaFX 21 (FXML + CSS)
+
+Datu bāze: MySQL 8.0+
+
+Būvēšana: Apache Maven
+
+Galvenās bibliotēkas: HikariCP, Apache POI, ControlsFX, BCrypt/PBKDF2, Logback.
+
+3. ARHITEKTŪRA
 Lietotne veidota, balstoties uz daudzslāņu (Multi-tier) arhitektūru un MVC paraugu:
 
-1. **Prezentācijas slānis (View):** FXML faili un CSS stili (`lv.socialcare.view`).
-2. **Kontrolieru slānis (Controller):** Java klases, kas apstrādā ievadi (`HubController`, `ClientCardController`).
-3. **Servisa slānis (Service):** Biznesa loģika un transakciju vadība (`ClientCardService`).
-4. **Datu piekļuves slānis (Repository):** Tieša JDBC komunikācija (`KlientsRepository`).
-5. **Datu bāze:** Relāciju DB (MySQL) ar automātisku shēmas migrāciju (`SchemaManager`).
+Prezentācijas slānis (View): FXML faili un CSS stili.
 
-**Drošības mehānismi:**
+Kontrolieru slānis (Controller): Java klases, kas apstrādā ievadi.
 
-- Datu šifrēšana miera stāvoklī (At-rest) un konfigurācijas failos.
-- Pesimistiskā bloķēšana (`RecordLockingService`), lai novērstu vienlaicīgu rediģēšanu.
-- Licences digitālā paraksta verifikācija (RSA).
+Servisa slānis (Service): Biznesa loģika un transakciju vadība.
 
----
+Datu piekļuves slānis (Repository): Tieša JDBC komunikācija.
 
-## 4. UZSTĀDĪŠANA (DEPLOYMENT)
+Datu bāze: MySQL ar automātisku shēmas migrāciju.
 
-### Prasības
+Drošības mehānismi:
 
-- **Java Runtime:** JDK 21 vai JRE 21.
-- **Datubāze:** MySQL Server 8.0+.
+Datu šifrēšana miera stāvoklī un konfigurācijas failos.
 
-### Inicializācija
+Pesimistiskā bloķēšana (RecordLockingService), lai novērstu vienlaicīgu rediģēšanu.
 
-1. Izveidojiet tukšu shēmu:
-   ```sql
-   CREATE DATABASE socialcare_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   Palaidiet JAR failu: java -jar klientu-registrs.jar
+Licences digitālā paraksta verifikācija (RSA).
 
-Pirmajā palaišanas reizē ievadiet DB pieslēguma datus. SchemaManager automātiski izveidos tabulas un klasifikatorus.
+4. UZSTĀDĪŠANA (DEPLOYMENT)
+Prasības
+
+JDK 21 vai JRE 21.
+
+MySQL Server 8.0+.
+
+Inicializācija
+
+Izveidojiet MySQL shēmu: CREATE DATABASE socialcare_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+Palaidiet: java -jar klientu-registrs.jar
+
+Pirmajā reizē ievadiet DB datus — SchemaManager automātiski sagatavos vidi.
 
 5. TEHNISKĀ DISKUSIJA: RISKI UN PAMATOJUMS
-Zemāk apkopoti divi pretēji skatījumi uz sistēmas arhitektūru un tehniskajiem lēmumiem.
+🔴 SKEPTIĶA VIEDOKLIS: 20 Iemesli, kāpēc var rasties problēmas
 
-🔴 SKEPTIĶA VIEDOKLIS: 20 Iemesli, kāpēc programma var saskarties ar problēmām
-Nav mākoņrisinājuma: Programma ir piesaistīta konkrētam datoram, liedzot attālinātu piekļuvi un komandas darbu.
+Nav mākoņrisinājuma: Piesaiste konkrētam datoram liedz attālinātu darbu.
 
-Vāja drošība: Paroles piesaiste datora nosaukumam (pc_name) ir nedroša un viegli apejama.
+Vāja drošība: Paroles piesaiste datora nosaukumam ir apejama.
 
-Tiešs JDBC lietojums: Manuāla SQL vaicājumu rakstīšana ir novecojusi, kļūdaina un grūti uzturama.
+Tiešs JDBC: SQL manuāla rakstīšana ir grūti uzturama.
 
-"Dieva" klases: HubController un ClientCardController ir pārāk lieli un sarežģīti, kas palielina kļūdu risku.
+"Dieva" klases: Kontrolieri ir pārāk lieli un sarežģīti.
 
-Manuāla pavedienu pārvaldība: Paļaušanās uz Platform.runLater un manuāliem Task var viegli "iesaldēt" lietotāja saskarni.
+Pavedieni: Manuāla Task pārvaldība var iesaldēt UI.
 
-Nav DI ietvara: Manuāla atkarību injekcija (initServices) padara kodu grūti testējamu un trauslu.
+Nav DI: Bez ietvara kods ir trausls un grūti testējams.
 
-Bīstama datu bāzes migrācija: SchemaManager manuāli maina shēmu ar ALTER TABLE, kas ir ārkārtīgi riskanti produkcijas vidē.
+Migrācija: ALTER TABLE produkcijā ir riskants.
 
-"Haki" kontrolieros: "Fallback" loģika KarteController, lai ielādētu sarakstu, ir slikta prakse, kas apiet servisa slāni.
+Haki: "Fallback" loģika apiet arhitektūras slāņus.
 
-Atkarība no ārējām programmām: BackupManager paļaujas uz mysqldump.exe, kas var nebūt pieejams vai būt nepareizā versijā.
+Ārējā atkarība: Paļaušanās uz mysqldump.exe.
 
-Nepabeigta funkcionalitāte: Daudzi kontrolieri (AprupesPlansController, ProtokolsController) satur tikai // TODO: komentārus.
+Nepabeigta funkcija: // TODO komentāri svarīgos kontrolieros.
 
-Neefektīva datu ielāde: SharedDataService ielādē visus datus startēšanas laikā, kas pie lieliem apjomiem padarīs programmas palaišanu ļoti lēnu.
+Ielāde: Eager loading pie lieliem datiem bremzēs startu.
 
-Manuāla "dirty state" pārvaldība: isDirty karodziņu manuāla uzstādīšana ir ļoti neparedzama un var novest pie datu zuduma.
+Dirty state: Manuāla izmaiņu sekošana ir neparedzama.
 
-Primitīva lomu sistēma: Ir tikai "lietotājs" un "administrators", kas neatbilst reālām sociālās aprūpes iestādes vajadzībām.
+Lomas: Tikai divi līmeņi ir par maz iestādes vajadzībām.
 
-Slikta mērogojamība: Arhitektūra ar tiešiem DB savienojumiem no katra klienta nav paredzēta lielam lietotāju skaitam.
+Mērogojamība: JDBC savienojumi no katra klienta nav bezgalīgi.
 
-Pašizgudrota kriptogrāfija: Licencēšanas un paroļu pārvaldības risinājumi ir sarežģīti un, visticamāk, nedrošāki par industriālas klases bibliotēkām.
+Pašizgudrota kriptogrāfija: Pašrakstīti risinājumi ir potenciāli nedroši.
 
-Nav vienotas kļūdu apstrādes: Kļūdu dialogi tiek izsaukti no dažādām vietām, radot nekonsekventu lietotāja pieredzi.
+Kļūdu apstrāde: Nekonsekventi kļūdu dialogi.
 
-"Stringly-typed" kods: Klasifikatoru nosaukumu izmantošana kā virknes ("atbildigie") ir kļūdaina un grūti refaktorējama.
+Stringly-typed: Klasifikatori kā virknes apgrūtina refaktorēšanu.
 
-Pārlieku sarežģīta dokumentācija: Milzīgs dokumentacija.txt fails ātri kļūs novecojis un ir grūti uzturams.
+Dokumentācija: Milzīgs .txt fails ātri novecos.
 
-Trūkst vienībtestu: Kods ir sarežģīts, bet nav redzamu vienībtestu, kas garantētu biznesa loģikas pareizību.
+Testi: Nav vienībtestu biznesa loģikai.
 
-Tehnoloģiskais risks: JavaFX ir nišas tehnoloģija darbvirsmas lietotnēm, kas apgrūtina jaunu izstrādātāju piesaisti un ilgtermiņa uzturēšanu.
+JavaFX: Nišas tehnoloģija, grūti piesaistīt jaunus izstrādātājus.
 
 🟢 ARHITEKTA ATBILDE: 20 Pretargumenti un Pamatojums
-Nav mākoņrisinājuma: Drošība un neatkarība. Sistēma garantē 99.9% pieejamību pat bez interneta savienojuma, kas ir kritiski svarīgi iestādēm lauku reģionos. Dati fiziski nepamet iestādi, atvieglojot GDPR atbilstību.
 
-Vāja drošība (piesaiste datoram): Fiziskā piekļuves kontrole. Slēgtā iestādē dators ir inventārs. Piesaiste darbstacijai (pc_name) atvieglo maiņu darbu bez sarežģītas lietotāju pārvaldības, paļaujoties uz telpu fizisko drošību.
+Neatkarība: 99.9% pieejamība bez interneta un GDPR atbilstība.
 
-Tiešs JDBC lietojums: Veiktspēja un kontrole. Izvairīšanās no ORM (piem., Hibernate) "maģijas" nodrošina zemu atmiņas patēriņu un ļauj rakstīt precīzi optimizētus SQL vaicājumus specifiskām atskaitēm.
+Fiziskā drošība: SAC datoram piesaiste ir operacionāli izdevīga.
 
-"Dieva" klases (Controller): Vienota biznesa loģika. Klienta karte ir viens nedalāms entītiju kopums. Centralizēts kontrolieris nodrošina datu integritāti starp cilnēm (piem., veselība ietekmē aprūpes plānu) bez liekas fragmentācijas.
+Kontrole: JDBC bez ORM maģijas taupa atmiņu un ir ātrāks.
 
-Manuāla pavedienu pārvaldība: Saskarnes atsaucība. JavaFX Task un Platform.runLater ir standarta mehānismi. Tie nodrošina precīzu kontroli pār to, kurš process drīkst atjaunināt UI, novēršot "iesaldēšanu" pie smagiem datu pieprasījumiem.
+Integritāte: Centralizēts kontrolieris nodrošina vienotu klienta datus.
 
-Nav DI ietvara: Ātrdarbība un vienkāršība. Spring vai Guice ieviešana palielinātu startēšanas laiku un JAR izmēru. Manuāla injekcija (initServices) ir caurskatāma, viegli atkļūdojama un pietiekama šāda mēroga lietotnei.
+Atsaucība: Standarta Task mehānismi sniedz pilnu kontroli.
 
-Bīstama datu bāzes migrācija: Autonoma izvietošana. Lietotne spēj pati sevi atjaunināt (SchemaManager), neprasot IT speciālista klātbūtni vai manuālus SQL skriptus pie klienta, kas ir kritiski "standalone" produktam.
+Vienkāršība: Manuāla injekcija ir caurskatāma un ātrdarbīga.
 
-"Haki" kontrolieros (Fallback): Noturība pret kļūdām (Resilience). "Fallback" saraksti nodrošina, ka programma ir lietojama pat tad, ja datubāzes konfigurācija ir bojāta vai nepilnīga. Lietotāja darba nepārtrauktība ir prioritāte.
+Autonomija: Sistēma spēj sevi uzturēt bez IT speciālista.
 
-Atkarība no ārējām programmām: Pārbaudīta uzticamība. mysqldump ir industrijas standarts. Pašiem rakstīt Java rezerves kopiju loģiku būtu riskanti un kļūdaini. Tas garantē, ka dati ir atjaunojami jebkurā MySQL instancē.
+Noturība: "Fallback" garantē darbu pat pie konfigurācijas kļūdām.
 
-Nepabeigta funkcionalitāte: Iteratīva izstrāde. // TODO komentāri un aizmetņi liecina par skaidru attīstības plānu un arhitektūru, kas paredzēta paplašināšanai, nebloķējot pamatfunkciju izlaišanu (MVP).
+Standarti: mysqldump ir uzticamākais nozares rīks.
 
-Neefektīva datu ielāde: Kešatmiņa ātrdarbībai. Datu ielāde startā (Eager loading) nodrošina, ka darba laikā visi saraksti un izvēlnes atveras momentāni, uzlabojot ikdienas lietošanas pieredzi.
+Iterācijas: // TODO norāda uz skaidru nākotnes plānu (MVP).
 
-Manuāla "dirty state" pārvaldība: Precizitāte. Automātiskie "listeners" bieži reaģē uz tehniskām izmaiņām. Manuāla kontrole ļauj definēt biznesa loģikas līmeņa izmaiņas, novēršot viltus brīdinājumus par saglabāšanu.
+Kešatmiņa: Eager loading padara ikdienas lietošanu momentānu.
 
-Primitīva lomu sistēma: Operacionālā efektivitāte. Mazās komandās (SAC) sarežģīta tiesību matrica traucē darbu. Modelis "Visi dara visu, izņemot Admin" atbilst reālajai dzīvei, kur darbinieki aizvieto viens otru.
+Precizitāte: Manuāla kontrole novērš viltus brīdinājumus.
 
-Slikta mērogojamība: Mērķtiecīga arhitektūra. Sistēma projektēta konkrētam lietotāju skaitam (LAN tīkls). Tā nav paredzēta kā globāls tīmekļa serviss, tāpēc tiešie DB savienojumi nodrošina viszemāko latentumu.
+Efektivitāte: Modelis "Visi dara visu" atbilst reālajai SAC videi.
 
-Pašizgudrota kriptogrāfija: Autonoma licencēšana. Iebūvēta parakstu pārbaude ļauj kontrolēt licences termiņus bez nepieciešamības pēc ārēja autentifikācijas servera, kas var nebūt sasniedzams.
+Fokuss: LAN tīklam tiešie DB savienojumi sniedz zemāko latentumu.
 
-Nav vienotas kļūdu apstrādes: Kontekstuāla informācija. Kļūdu paziņojumi tiek veidoti uz vietas, lai sniegtu lietotājam konkrētu instrukciju (piem., "Pārbaudiet personas kodu"), nevis ģenerisku sistēmas kļūdu.
+Autonoma licencēšana: RSA paraksti strādā bez ārēja servera.
 
-"Stringly-typed" kods: Dinamisms un elastība. Klasifikatoru nosaukumu izmantošana kā virknes ļauj viegli pievienot jaunus sarakstus datubāzē un ListManagementController, nepārkompilējot Java kodu.
+Konteksts: Kļūdu ziņojumi ir specifiski un lietotājam saprotami.
 
-Pārlieku sarežģīta dokumentācija: Atbilstība standartiem. Regulētā nozarē (sociālā aprūpe, medicīna) detalizēta tehniskā specifikācija ir obligāta prasība auditiem, sertifikācijai un sistēmas nodošanai.
+Elastība: Virkņu izmantošana ļauj mainīt datus bez pārkompilēšanas.
 
-Trūkst vienībtestu: Fokuss uz GUI testēšanu. Lietotnē, kur 90% loģikas ir UI mijiedarbība, vienībtesti (Unit tests) ir mazāk vērtīgi par integrācijas testiem un manuālajiem scenārijiem, kas pārbauda reālo lietotāja plūsmu.
+Atbilstība: Detalizēta dokumentācija ir obligāta auditiem.
 
-Tehnoloģiskais risks (JavaFX): Stabilitāte un briedums. JavaFX ir nobriedusi, LTS (Long Term Support) tehnoloģija, kas ir ideāla "Rich Client" lietotnēm. Tā patērē mazāk resursu nekā tīmekļa tehnoloģijas (Electron) un ir stabilāka ilgtermiņā.
+GUI fokuss: Reālais ieguvums ir UI integrācijas testi, nevis Unit testi.
+
+Stabilitāte: JavaFX ir nobriedusi un stabila LTS tehnoloģija.
 
 6. LICENCE
-Programmatūra tiek izplatīta saskaņā ar noteikumiem, kas aprakstīti license.txt failā. Tā tiek nodrošināta "tāda, kāda tā ir", un lietotājs uzņemas pilnu atbildību par datu drošību un pareizību.
+Programmatūra tiek izplatīta saskaņā ar license.txt noteikumiem. "Tāda, kāda tā ir".
 
 7. AUTORS
-Dāvis Strazds
-
-E-pasts: davisstrazds@gmail.com
+Dāvis Strazds E-pasts: davisstrazds@gmail.com
 
 Tālrunis: 26482667
 
 <a name="english"></a>
 
 🇬🇧 English
-====================================================================== SOFTWARE "Social Care Institution Management System"
-Version: 2.0.0 Type: Desktop application for Social Care Centers (SCC).
+SOFTWARE "Social Care Institution Management System"
+Version: 2.0.0
+
+Type: Desktop application for Social Care Centers (SCC).
 
 The "Social Care Institution Management System" project is a specialized system designed to digitize and automate client data management, reducing administrative burden and ensuring data integrity. The system provides full lifecycle management of client cases – from admission to discharge.
 
@@ -213,32 +209,37 @@ The project is based on 13+ years of practical experience in social work and com
 The system covers the following functional areas:
 
 🏠 Dashboard
-Operational Information: Upcoming birthdays, client count (total/new/discharged).
+
+Operational Info: Upcoming birthdays, client count (total/new/discharged).
 
 Alerts: Document deadlines (expired/approaching) and required assessments.
 
 📇 Client Management
+
 Registry: Creation of new clients with unique ID (PK) verification and duplicate control.
 
-Client Card: Basic data, social anamnesis, assessment (baseline/dynamic), family members, document deadlines.
+Client Card: Basic data, social anamnesis, assessments, family, and document deadlines.
 
 Status Control: Lifecycle management (Active -> Discharged -> Deceased).
 
 📝 Planning and Documentation
-Care and Rehabilitation Plans: Structured plan development and goal setting.
 
-Protocols: Creation of social rehabilitation protocols and conversation descriptions.
+Care Plans: Structured plan development and goal setting.
 
-Excel Generation: Automated export of documents (plans, hospital referral letters) to .xlsx templates.
+Protocols: Social rehabilitation protocols and conversation descriptions.
+
+Excel Generation: Automated export of documents to .xlsx templates.
 
 Audit: Automated logging of all actions in the audit journal.
 
 💊 Medicine and Health
+
 Health Card: Diagnoses (ICD-10), attending physicians, anamnesis.
 
 Medication Center: Compiling medication lists, order history, and export.
 
 📊 Statistics and Analytics
+
 Data Visualization: Demographics, client movement, care levels, length of stay.
 
 Activity Log: Tracking activities and specialist workload analysis.
@@ -252,145 +253,133 @@ Database: MySQL 8.0+
 
 Build Tool: Apache Maven
 
-Core Libraries:
-
-HikariCP (JDBC Connection Pooling)
-
-Apache POI (Excel Generation)
-
-ControlsFX (Extended UI Components)
-
-BCrypt/PBKDF2 (Security)
-
-Logback (Logging)
+Core Libraries: HikariCP, Apache POI, ControlsFX, BCrypt/PBKDF2, Logback.
 
 3. ARCHITECTURE
-The application is built based on a multi-tier architecture and the MVC pattern:
+Multi-tier architecture based on the MVC pattern:
 
-Presentation Layer (View): FXML files and CSS styles (lv.socialcare.view).
+View: FXML and CSS styles.
 
-Controller Layer (Controller): Java classes handling input (HubController, ClientCardController).
+Controller: Java classes for input handling.
 
-Service Layer (Service): Business logic and transaction management (ClientCardService).
+Service: Business logic and transactions.
 
-Data Access Layer (Repository): Direct JDBC communication (KlientsRepository).
+Repository: Direct JDBC communication.
 
-Database: Relational DB (MySQL) with automated schema migration (SchemaManager).
+Database: Relational MySQL with automated schema migration.
 
-Security Mechanisms:
+Security:
 
-Data encryption at rest and in configuration files.
+Data encryption at rest and in config files.
 
-Pessimistic locking (RecordLockingService) to prevent simultaneous editing.
+Pessimistic locking via RecordLockingService.
 
 Digital license signature verification (RSA).
 
 4. DEPLOYMENT
 Requirements
-Java Runtime: JDK 21 or JRE 21.
 
-Database: MySQL Server 8.0+.
+JDK 21 or JRE 21.
+
+MySQL Server 8.0+.
 
 Initialization
-Create an empty schema:
 
-SQL
-CREATE DATABASE socialcare_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-Run the JAR file: java -jar klientu-registrs.jar
+Create schema: CREATE DATABASE socialcare_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-On the first run, enter the DB connection details. SchemaManager will automatically create tables and classifiers.
+Run: java -jar klientu-registrs.jar
+
+Enter DB details on first launch — SchemaManager will handle the rest.
 
 5. TECHNICAL DISCUSSION: RISKS AND RATIONALE
-Below are two opposing views on the system architecture and technical decisions.
+🔴 SKEPTIC'S VIEW
 
-🔴 SKEPTIC'S VIEW: 20 Reasons why the program might encounter problems
-No Cloud Solution: The program is tied to a specific computer, preventing remote access and teamwork.
+No Cloud: Tied to hardware, no remote work.
 
-Weak Security: Linking the password to the computer name (pc_name) is insecure and easily bypassed.
+Weak Security: Hardware-based password linking is bypassable.
 
-Direct JDBC Usage: Manual SQL query writing is outdated, error-prone, and difficult to maintain.
+Direct JDBC: Manual SQL is hard to maintain.
 
-"God" Classes: HubController and ClientCardController are too large and complex, increasing the risk of errors.
+God Classes: Overly complex controllers.
 
-Manual Thread Management: Relying on Platform.runLater and manual Tasks can easily "freeze" the user interface.
+Threads: Manual task management risks UI freezes.
 
-No DI Framework: Manual dependency injection (initServices) makes the code hard to test and fragile.
+No DI: Code is fragile without a framework.
 
-Dangerous Database Migration: SchemaManager manually alters the schema with ALTER TABLE, which is extremely risky in production.
+Migration: Direct ALTER TABLE is risky in production.
 
-"Hacks" in Controllers: Fallback logic in KarteController to load lists is bad practice that bypasses the service layer.
+Hacks: Fallback logic bypasses layers.
 
-Dependency on External Programs: BackupManager relies on mysqldump.exe, which may not be available or be the wrong version.
+External Deps: Relying on mysqldump.exe.
 
-Incomplete Functionality: Many controllers (AprupesPlansController, ProtokolsController) contain only // TODO: comments.
+Incomplete: // TODO tags in core files.
 
-Inefficient Data Loading: SharedDataService loads all data at startup, which will make program launch very slow with large datasets.
+Eager Loading: Slow startup with large datasets.
 
-Manual Dirty State Management: Manually setting isDirty flags is highly unpredictable and can lead to data loss.
+Dirty State: Manual tracking is unpredictable.
 
-Primitive Role System: There are only "user" and "administrator" roles, which do not meet real social care institution needs.
+Roles: Only two levels are insufficient for organizations.
 
-Poor Scalability: Architecture with direct DB connections from each client is not designed for a large number of users.
+Scalability: Direct DB connections are limited.
 
-In-house Cryptography: Licensing and password management solutions are complex and likely less secure than industry-grade libraries.
+Custom Crypto: In-house solutions are risky.
 
-No Unified Error Handling: Error dialogs are called from various places, creating an inconsistent user experience.
+Errors: Inconsistent error dialogs.
 
-"Stringly-typed" Code: Using classifier names as strings ("atbildigie") is error-prone and hard to refactor.
+Stringly-typed: Using strings for classifiers hinders refactoring.
 
-Overly Complex Documentation: A massive dokumentacija.txt file will quickly become outdated and is hard to maintain.
+Docs: A massive .txt file will become obsolete.
 
-Lack of Unit Tests: The code is complex, but there are no visible unit tests to ensure business logic correctness.
+Testing: Lack of unit tests for logic.
 
-Technological Risk: JavaFX is a niche technology for desktop apps, making it hard to attract new developers and maintain long-term.
+JavaFX: Niche tech, harder to find developers.
 
-🟢 ARCHITECT'S RESPONSE: 20 Counter-arguments and Rationale
-No Cloud Solution: Security and Independence. The system guarantees 99.9% availability even without an internet connection, which is critical for institutions in rural regions. Data physically never leaves the institution, facilitating GDPR compliance.
+🟢 ARCHITECT'S RESPONSE
 
-Weak Security (PC Linking): Physical Access Control. In a closed institution, the computer is inventory. Linking to the workstation (pc_name) facilitates shift work without complex user management, relying on the physical security of the premises.
+Security: 99.9% availability without internet; GDPR compliant.
 
-Direct JDBC Usage: Performance and Control. Avoiding ORM (e.g., Hibernate) "magic" ensures low memory consumption and allows for writing precisely optimized SQL queries for specific reports.
+Physical Control: Hardware linking is efficient in SCC environments.
 
-"God" Classes (Controller): Unified Business Logic. The client card is a single indivisible entity set. A centralized controller ensures data integrity between tabs (e.g., health affecting the care plan) without unnecessary fragmentation.
+Control: JDBC without ORM saves memory and adds speed.
 
-Manual Thread Management: Interface Responsiveness. JavaFX Task and Platform.runLater are standard mechanisms. They provide precise control over which process is allowed to update the UI, preventing "freezing" during heavy data requests.
+Integrity: Centralized controllers ensure data consistency.
 
-No DI Framework: Speed and Simplicity. Implementing Spring or Guice would increase startup time and JAR size. Manual injection (initServices) is transparent, easy to debug, and sufficient for an application of this scale.
+Responsiveness: Task mechanisms provide full UI control.
 
-Dangerous Database Migration: Autonomous Deployment. The app is capable of updating itself (SchemaManager), requiring no IT specialist presence or manual SQL scripts at the client site, which is critical for a "standalone" product.
+Simplicity: Manual injection is transparent and fast.
 
-"Hacks" in Controllers (Fallback): Resilience. Fallback lists ensure the program is usable even if the database configuration is corrupted or incomplete. User work continuity is the priority.
+Autonomy: The app handles its own updates without IT staff.
 
-Dependency on External Programs: Proven Reliability. mysqldump is an industry standard. Writing Java backup logic from scratch would be risky and error-prone. This guarantees data is restorable in any MySQL instance.
+Resilience: Fallback ensures work continues during errors.
 
-Incomplete Functionality: Iterative Development. // TODO comments and placeholders indicate a clear development plan and an architecture designed for expansion without blocking the release of core functions (MVP).
+Reliability: mysqldump is the industry standard.
 
-Inefficient Data Loading: Caching for Speed. Eager loading at startup ensures that all lists and menus open instantly during operation, improving the daily user experience.
+Iterative: // TODO markers show a clear MVP roadmap.
 
-Manual Dirty State Management: Precision. Automatic listeners often react to technical changes. Manual control allows defining business-logic-level changes, preventing false save warnings.
+Caching: Eager loading makes daily use instantaneous.
 
-Primitive Role System: Operational Efficiency. In small teams (SCC), a complex permissions matrix hinders work. The "Everyone does everything, except Admin" model reflects real life, where employees substitute for one another.
+Precision: Manual control prevents false save alerts.
 
-Poor Scalability: Targeted Architecture. The system is designed for a specific number of users (LAN network). It is not intended as a global web service; therefore, direct DB connections provide the lowest latency.
+Efficiency: "Everyone does everything" fits real SCC workflows.
 
-In-house Cryptography: Autonomous Licensing. Built-in signature verification allows controlling license terms without the need for an external authentication server, which might not be reachable.
+Performance: LAN-focused direct DB connections offer lowest latency.
 
-No Unified Error Handling: Contextual Information. Error messages are generated on the spot to provide the user with specific instructions (e.g., "Check ID number") rather than a generic system error.
+Licensing: RSA signatures work without external servers.
 
-"Stringly-typed" Code: Dynamism and Flexibility. Using classifier names as strings allows easily adding new lists to the database and ListManagementController without recompiling Java code.
+Context: Error messages are specific and actionable.
 
-Overly Complex Documentation: Regulatory Compliance. In a regulated industry (social care, medicine), detailed technical specification is a mandatory requirement for audits, certification, and system handovers.
+Flexibility: Strings allow data changes without recompiling.
 
-Lack of Unit Tests: Focus on GUI Testing. In an app where 90% of logic is UI interaction, unit tests are less valuable than integration tests and manual scenarios that verify the real user flow.
+Compliance: Detailed docs are required for audits.
 
-Technological Risk (JavaFX): Stability and Maturity. JavaFX is a mature, LTS (Long Term Support) technology ideal for "Rich Client" applications. It consumes fewer resources than web technologies (Electron) and is more stable in the long run.
+GUI Focus: UI integration testing is more valuable than Unit tests.
+
+Stability: JavaFX is a mature and stable LTS technology.
 
 6. LICENSE
-The software is distributed according to the terms described in the license.txt file. It is provided "as is," and the user assumes full responsibility for data security and accuracy.
+Distributed under the terms in license.txt. Provided "as is".
 
 7. AUTHOR
-Dāvis Strazds
-
-Email: davisstrazds@gmail.com
+Dāvis Strazds Email: davisstrazds@gmail.com
 
 Phone: +371 26482667
