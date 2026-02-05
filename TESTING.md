@@ -14,7 +14,7 @@
 ### 🧩 Funkcionalitāte un Mērķis
 Sistēmas mērķis ir atbrīvot speciālistu rokas no papīriem, lai fokuss paliktu uz cilvēku. 
 * **Dzīves cikls:** No pirmā kontakta un sociālās anamnēzes līdz rehabilitācijas plāna izpildei un izrakstīšanai.
-* **Likumdošana:** Pilnīga atbilstība MK Nr. 138 un Nr. 291 noteikumiem.
+* **Likumdošana:** Pilnīga atbilstība MK Nr. 138 un Nr. 388 noteikumiem.
 * **Drošība:** Lokāla arhitektūra garantē, ka sensitīvie dati nepamet iestādi (100% GDPR).
 
 ---
@@ -74,3 +74,4 @@ Zemāk ir uzskaitītas visas testu klases, kas nodrošina sistēmas "Zero-Error"
 
 ### 👤 Autors / Author
 **Dāvis Strazds** 📧 [davisstrazds@gmail.com](mailto:davisstrazds@gmail.com) | 📞 +371 26482667
+
