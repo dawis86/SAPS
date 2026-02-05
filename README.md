@@ -9,6 +9,20 @@
 ### 🛡️ Sistēmas apraksts
 "Sociālās aprūpes iestāžu pārvaldības sistēma" ir specializēta darbvirsmas lietojumprogramma, kas izstrādāta, lai digitalizētu un automatizētu klientu datu pārvaldību sociālās aprūpes centros (SAC). Sistēma nodrošina pilnu klienta lietas dzīves cikla pārvaldību – no uzņemšanas līdz izrakstīšanai. Projekts balstīts uz 13+ gadu praktisku pieredzi sociālajā darbā un atbilst MK noteikumiem Nr. 138 un Nr. 291.
 
+---
+
+## 📸 Sistēmas ieskats / System Preview
+
+| Ekrānuzņēmums / Screenshot | Apraksts / Description |
+| :--- | :--- |
+| ![Dashboard](img/Galvenais_skats.png) | **LV:** Galvenais panelis – pārskats par iestādes dinamiku.<br>**EN:** Main dashboard – overview of institution dynamics. |
+| ![Client Card](img/Klienta%20Karte_Karte_Personas%20dati.png) | **LV:** Klienta karte – detalizēta sociālā un medicīniskā informācija.<br>**EN:** Client card – detailed social and medical information. |
+| ![Reports](img/Statist_nodarbibas_dinamika.png) | **LV:** Atskaišu modulis – automātiska dokumentu ģenerēšana.<br>**EN:** Reporting module – automatic document generation. |
+
+> **Piezīme / Note:** *Ekrānuzņēmumos izmantoti testa dati. / Screenshots contain test data only.*
+
+---
+
 * **Versija:** 2.0.0
 * **Tips:** Darbvirsmas (Desktop) lietojumprogramma
 * **Tehnoloģijas:** Java 21 (LTS), JavaFX 21, MySQL 8.0+
