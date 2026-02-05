@@ -1,7 +1,7 @@
 # 🛠 Tehniskā specifikācija un Sistēmas arhitektūra
 ### Technical Specification & System Architecture
 
-**Versija:** 2.1.0  
+**Versija:** 2.0.0  
 **Autors:** Dāvis Strazds  
 **Fokuss:** Sociālā darba procesi, datu integritāte un drošība
 
