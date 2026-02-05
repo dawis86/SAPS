@@ -1,45 +1,76 @@
-Testēšanas un kvalitātes kontroles pārskats / Testing & QA Overview
-Latviešu 🇱🇻 | English 🇬🇧
+# Sociālās aprūpes iestāžu pārvaldības sistēma (SAPS)
+### Social Care Institution Management System
 
-<a name="testing-lv"></a>
+**Valoda / Language:** [Latviešu 🇱🇻](#readme-lv) | [English 🇬🇧](#readme-en)
 
-🇱🇻 Testēšanas stratēģija
-Kā sociālā darba speciālists un šīs sistēmas autors, es saprotu, ka kļūda šādā programmā nav tikai "tehniska kļūme" – tā var ietekmēt reālu cilvēku aprūpi. Tāpēc SAPS kvalitātes kontrole ir balstīta uz "Zero-Error" principu kritiskajās sadaļās.
+---
 
-🛡️ Testēšanas līmeņi
-Integrācijas testi (Integration Testing): Pārbaudīta nepārtraukta datu plūsma starp MySQL datubāzi un JavaFX saskarni, nodrošinot, ka neviens ieraksts nepazūd pie lielas noslodzes.
+<a name="readme-lv"></a>
+## 🇱🇻 Par projektu: SAPS
 
-Lietotāja saskarnes (UI) validācija: Katrs ievades lauks (piemēram, Personas kods vai Datums) ir aprīkots ar reāllaika validāciju, lai novērstu cilvēcisko kļūdu datu ievades brīdī.
+### 🌟 Sociālā darbinieka redzējums tehnoloģijās
+**Sociālās aprūpes iestāžu pārvaldības sistēma (SAPS)** nav standarta komercprodukts. To ir izstrādājis sociālā darba speciālists ar **13+ gadu praktisko pieredzi**. Šī sistēma ir radīta "no lauka", saprotot katru dokumentu, katru MK noteikumu niansi un to administratīvo slogu, ko rada darbs sociālajā aprūpē.
 
-Stresa testi: Simulēta datubāzes darbība ar tūkstošiem klientu ierakstu, lai garantētu, ka sistēma nezaudē ātrdarbību iestādes izaugsmes gaitā.
+### 🎯 Galvenais mērķis
+Digitalizēt un automatizēt klientu datu pārvaldību, maksimāli samazinot laiku pie papīriem, lai speciālists varētu fokusēties uz **cilvēku**.
 
-🧪 Kritiskie testēšanas scenāriji
-Datu integritāte: Pārbaudīts, vai, rediģējot aprūpes plānu vienlaicīgi no divām darbstacijām, nostrādā Pesimistiskā bloķēšana (RecordLockingService).
+### 🧩 Funkcionalitāte (Sociālā darba fokuss)
+* **Pilns dzīves cikls:** Uzņemšana, sociālā anamnēze, vajadzību novērtēšana un izrakstīšana.
+* **Individuālā plānošana:** Strukturēti Aprūpes un Rehabilitācijas plāni (MK Nr. 138 un Nr. 291).
+* **Veselība:** Veselības kartes ar MK10 diagnozēm un medikamentu pārvaldību.
+* **Analītika:** Automātiska statistikas ģenerēšana atskaitēm un darba plānošanai.
 
-Dokumentu ģenerēšana: Veikta simtiem Excel eksporta ciklu, pārbaudot, vai dati .xlsx veidnēs sakrīt ar sistēmā ievadītajiem līdz pēdējam komatam.
+### 🏗️ Tehniskā Arhitektūra
+* **Valoda:** Java 21 (LTS) ar JavaFX 21 saskarni.
+* **Datu drošība:** Lokāla MySQL 8.0+ datubāze (100% GDPR atbilstība, dati nepamet iestādi).
+* **Stabilitāte:** Pesimistiskā bloķēšana (`RecordLockingService`) datu integritātei.
 
-Drošības audits: Testēta BCrypt šifrēšana un RSA licences verifikācija, lai izslēgtu neautorizētu piekļuvi sensitīvajiem datiem.
+---
 
-<a name="testing-en"></a>
+### 🧪 Testēšana un Kvalitātes Kontrole
 
-🇬🇧 Testing Strategy
-As a social work professional and the author of this system, I recognize that a software bug here is more than just a "technical glitch" – it directly impacts human care. Therefore, SAPS quality control is built on a "Zero-Error" principle for all critical modules.
+| Kategorija | Pārbaudes veids | Mērķis |
+| :--- | :--- | :--- |
+| **Datu Integritāte** | `ActivityRepositoryTest` | Novērst nejaušu datu zudumu (Soft Delete loģika). |
+| **Drošība** | `AdminServiceTest` | Bloķēt neautorizētu piekļuvi sensitīviem datiem. |
+| **Stabilitāte** | `ChaosMonkeyTest` | Garantēt sistēmas darbību pie kļūmēm. |
+| **Veiktspēja** | `SystemPerformanceTest` | Ātrs Excel eksports pat pie tūkstošiem ierakstu. |
 
-🛡️ Testing Levels
-Integration Testing: Verified seamless data flow between the MySQL database and the JavaFX interface, ensuring no data loss under high load.
+---
 
-User Interface (UI) Validation: Every input field (e.g., Personal ID or Date) features real-time validation to prevent human error during data entry.
+<a name="readme-en"></a>
+## 🇬🇧 About the Project: SAPS
 
-Stress Testing: Simulated database operations with thousands of client records to guarantee system performance as the institution grows.
+### 🌟 A Social Worker's Vision
+**SAPS** is a unique system developed by a social work specialist with **13+ years of field experience**. It addresses the real-world administrative burdens of social care, ensuring compliance with national regulations while keeping the focus on the client.
 
-🧪 Critical Test Scenarios
-Data Integrity: Verified that Pessimistic Locking (RecordLockingService) triggers correctly when a care plan is edited simultaneously from two workstations.
+### 🎯 Primary Goal
+To digitize client data management, minimizing paperwork and maximizing the time specialists spend on direct human care.
 
-Document Generation: Performed hundreds of Excel export cycles to ensure that data in .xlsx templates perfectly matches the system records.
+### 🧩 Core Features
+* **Full Lifecycle:** From initial intake and social anamnesis to discharge.
+* **Care Planning:** Structured Rehabilitation plans aligned with legal requirements.
+* **Health Integration:** Health cards with ICD-10 diagnoses and medication tracking.
+* **Automation:** Instant statistical reporting for workload analysis.
 
-Security Audit: Tested BCrypt encryption and RSA license verification to eliminate any possibility of unauthorized access to sensitive data.
+### 🏗️ Technical Stack
+* **Stack:** Java 21, JavaFX 21, MySQL 8.0+.
+* **Security:** Local database architecture for maximum privacy and GDPR compliance.
+* **Integrity:** Pessimistic locking to prevent data conflicts during multi-user access.
 
-📈 Secinājums / Conclusion
-Sistēma ir izgājusi pilnu manuālo un automatizēto integrācijas testu ciklu. Tā ir gatava darbam reālos iestādes apstākļos, nodrošinot stabilitāti, ko pieprasa sociālās aprūpes nozare.
+---
 
-The system has passed a full cycle of manual and automated integration tests. It is production-ready for real-world institutional environments, providing the stability required by the social care sector.
+### 🧪 Testing & Quality Assurance
+
+| Category | Test Type | Goal |
+| :--- | :--- | :--- |
+| **Data Integrity** | `ActivityRepositoryTest` | Ensures "Soft Delete" logic works perfectly. |
+| **Security** | `AdminServiceTest` | Prevents unauthorized access to sensitive records. |
+| **Resilience** | `ChaosMonkeyTest` | Simulates system failures to ensure uptime. |
+| **Performance** | `SystemPerformanceTest` | Measures high-speed Excel export capabilities. |
+
+---
+
+### 👤 Autors / Author
+**Dāvis Strazds** 📧 [davisstrazds@gmail.com](mailto:davisstrazds@gmail.com)  
+📞 +371 26482667
