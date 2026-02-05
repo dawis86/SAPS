@@ -8,7 +8,7 @@
 ---
 
 ## 1. Sistēmas pārskats un mērķis
-Sistēma ir radīta kā **Rich Client** darbvirsmas lietojumprogramma, lai nodrošinātu maksimālu ātrdarbību un datu privātumu. Tās mērķis ir aizstāt sadrumstalotu papīra/Excel uzskaiti ar vienotu, MK noteikumiem (Nr. 138, Nr. 291) atbilstošu digitālo ekosistēmu.
+Sistēma ir radīta kā **Rich Client** darbvirsmas lietojumprogramma, lai nodrošinātu maksimālu ātrdarbību un datu privātumu. Tās mērķis ir aizstāt sadrumstalotu papīra/Excel uzskaiti ar vienotu, MK noteikumiem (Nr. 138, Nr. 338) atbilstošu digitālo ekosistēmu.
 
 ### 🏗️ Tehnoloģiju steks
 | Komponente | Tehnoloģija | Pamatojums |
