@@ -1,6 +1,12 @@
 # Sociālās aprūpes iestāžu pārvaldības sistēma (SAPS)
 ### Social Care Institution Management System
 
+### 🛡️ Kvalitātes un Drošības Audits
+[![Testing Status](https://img.shields.io/badge/Tests-207%20Passed-success?style=for-the-badge&logo=junit5)](https://dawis86.github.io/SAPS/)
+[![Quality Gate](https://img.shields.io/badge/Security-Nuclear%20Tested-red?style=for-the-badge&logo=target)](https://dawis86.github.io/SAPS/)
+
+**[SPIED ŠEIT, LAI APSKATĪTU INTERAKTĪVO TESTU ATSKAITI](https://dawis86.github.io/SAPS/)**
+
 **Valoda / Language:** [Latviešu 🇱🇻](#latviešu) | [English 🇬🇧](#english)
 
 <a name="latviešu"></a>
@@ -58,7 +64,7 @@
 16. **Kļūdu apstrāde:** Nekonsekventi kļūdu dialogi dažādās sistēmas vietās.
 17. **Stringly-typed:** Klasifikatoru nosaukumi kā virknes apgrūtina refaktorēšanu.
 18. **Dokumentācija:** Milzīgs `.txt` fails ātri kļūs novecojis.
-19. **Trūkst testu:** Nav vienībtestu, kas garantētu biznesa loģikas pareizību.
+19. **Kvalitātes garantija: Ieviesta visaptveroša testēšanas piramīda (200+ testi), kas aptver stresa, drošības un datu integritātes scenārijus.
 20. **Tehnoloģiskais risks:** JavaFX apgrūtina jaunu izstrādātāju piesaisti.
 
 #### 🟢 ARHITEKTA ATBILDE (20 Argumenti pamatojumam)
@@ -126,7 +132,7 @@ A specialized desktop application designed to digitize and automate client data 
 16. **Error Handling:** Inconsistent error dialogs across the system.
 17. **Stringly-typed:** Using strings for classifiers hinders refactoring.
 18. **Documentation:** Massive `.txt` files become obsolete quickly.
-19. **Lack of Tests:** No unit tests to ensure business logic.
+19. **Quality Assurance** Comprehensive testing suite (200+ tests) covering stress, security, and data integrity scenarios.
 20. **Tech Risk:** JavaFX makes it hard to find new developers.
 
 #### 🟢 ARCHITECT'S RESPONSE (20 Counter-arguments)
