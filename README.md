@@ -1,164 +1,309 @@
-# Sociālās aprūpes iestāžu pārvaldības sistēma (SAPS)
-### Social Care Institution Management System
+# Klientu Reģistrs
 
-### 🛡️ Kvalitātes un Drošības Audits
-[![Testing Status](https://img.shields.io/badge/Tests-207%20Passed-success?style=for-the-badge&logo=junit5)](https://dawis86.github.io/SAPS/)
-[![Quality Gate](https://img.shields.io/badge/Security-Nuclear%20Tested-red?style=for-the-badge&logo=target)](https://dawis86.github.io/SAPS/)
-
-**[SPIED ŠEIT, LAI APSKATĪTU INTERAKTĪVO TESTU ATSKAITI](https://dawis86.github.io/SAPS/)**
-
-**Valoda / Language:** [Latviešu 🇱🇻](#latviešu) | [English 🇬🇧](#english)
-
-<a name="latviešu"></a>
-## 🇱🇻 Latviešu versija
-
-### 🛡️ Sistēmas apraksts
-"Sociālās aprūpes iestāžu pārvaldības sistēma" ir specializēta darbvirsmas lietojumprogramma, kas izstrādāta, lai digitalizētu un automatizētu klientu datu pārvaldību sociālās aprūpes centros (SAC). Sistēma nodrošina pilnu klienta lietas dzīves cikla pārvaldību – no uzņemšanas līdz izrakstīšanai. Projekts balstīts uz 13+ gadu praktisku pieredzi sociālajā darbā un atbilst MK noteikumiem Nr. 138 un Nr. 291.
+**Versija:** 2.1.0  
+**Statuss:** PRODUKCIJAS GATAVS  
+**Izstrādātājs:** Dāvis Strazds  
+**Pārbaudīts:** 2026.03.05  
 
 ---
 
-## 📸 Sistēmas ieskats / System Preview
+## Par projektu
 
-| Ekrānuzņēmums / Screenshot | Apraksts / Description |
-| :--- | :--- |
-| ![Dashboard](img/Galvenais_skats.png) | **LV:** Galvenais panelis – pārskats par iestādes dinamiku.<br>**EN:** Main dashboard – overview of institution dynamics. |
-| ![Client Card](img/Klienta%20Karte_Karte_Personas%20dati.png) | **LV:** Klienta karte – detalizēta sociālā un medicīniskā informācija.<br>**EN:** Client card – detailed social and medical information. |
-| ![Reports](img/Statist_nodarbibas_dinamika.png) | **LV:** Atskaišu modulis – automātiska dokumentu ģenerēšana.<br>**EN:** Reporting module – automatic document generation. |
-
-> **Piezīme / Note:** *Ekrānuzņēmumos izmantoti testa dati. / Screenshots contain test data only.*
+**Klientu Reģistrs** ir JavaFX desktop aplikācija, kas paredzēta sociālās aprūpes iestādēm klientu datu pārvaldībai. Aplikācija nodrošina pilnu klientu dzīves cikla pārvaldību, ieskaitot klienta karti, aprūpes plānus, medicīniskos datus, protokolus un citu svarīgu informāciju.
 
 ---
 
-* **Versija:** 2.0.0
-* **Tips:** Darbvirsmas (Desktop) lietojumprogramma
-* **Tehnoloģijas:** Java 21 (LTS), JavaFX 21, MySQL 8.0+
+## Galvenās funkcijas
 
-### 🚀 Funkcionalitāte
+### 👥 Lietotāju pārvaldība
+- Vairāku lomu atbalsts (Administrator, Manager, Social Worker, Medical Staff)
+- Droša autentifikācija ar sesiju pārvaldību
+- Paroļu pārvaldība un tiesību piešķiršana
 
-* **🏠 Sākuma Panelis:** Tuvākās dzimšanas dienas, klientu skaits, dokumentu termiņu brīdinājumi.
-* **📇 Klientu Pārvaldība:** Reģistrs ar PK pārbaudi, sociālā anamnēze, novērtēšana, piederīgie.
-* **📝 Plānošana:** Aprūpes un rehabilitācijas plāni, protokoli, automātiska Excel ģenerēšana.
-* **💊 Medicīna:** Veselības kartes (MK10), medikamentu centrs un pasūtījumu vēsture.
-* **📊 Analītika:** Demogrāfija, uzturēšanās ilgums un speciālistu noslodzes analīze.
+### 👥 Klientu pārvaldība
+- Klientu reģistrācija un pārvaldība
+- Klientu kartes izveide un uzturēšana
+- Ģimenes locekļu pārvaldība
+- Klientu meklēšana un filtrēšana
 
----
+### 📋 Aprūpes plāni
+- Aprūpes plānu izveide un pārvaldība
+- Rehabilitācijas plāni
+- Nodarbību reģistrēšana un plānošana
+- Aktivitāšu analīze
 
-### ⚖️ Tehniskā diskusija: Riski un Pamatojums
+### 🏥 Medicīniskie dati
+- Veselības kartes pārvaldība
+- Medikamentu pieprasījumi
+- Slimnīcas veidlapu izpilde
+- Medicīniskā statistika
 
-#### 🔴 SKEPTIĶA VIEDOKLIS (20 Iemesli kritikai)
-1. **Nav mākoņrisinājuma:** Programma piesaistīta datoram, liedzot attālinātu piekļuvi.
-2. **Vāja drošība:** Paroles piesaiste datora nosaukumam (`pc_name`) ir nedroša.
-3. **Tiešs JDBC lietojums:** Manuāla SQL rakstīšana ir novecojusi un grūti uzturama.
-4. **"Dieva" klases:** Kontrolieri ir pārāk lieli, kas palielina kļūdu risku.
-5. **Pavedienu pārvaldība:** Manuāls `Task` lietojums var "iesaldēt" lietotāja saskarni.
-6. **Nav DI ietvara:** Manuāla injekcija padara kodu trauslu un grūti testējamu.
-7. **Bīstama migrācija:** `SchemaManager` manuāli maina shēmu produkcijas vidē.
-8. **"Haki" kontrolieros:** "Fallback" loģika apiet servisa slāni.
-9. **Ārējā atkarība:** Paļaušanās uz `mysqldump.exe` pieejamību.
-10. **Nepabeigta funkcija:** Kontrolieri satur daudzus `// TODO:` komentārus.
-11. **Neefektīva ielāde:** Visi dati tiek ielādēti startā, kas palēninās darbību.
-12. **Dirty state:** Manuāla `isDirty` karodziņu vadība ir neparedzama.
-13. **Primitīvas lomas:** Tikai lietotājs/admin modelis neatbilst iestāžu vajadzībām.
-14. **Mērogojamība:** Tiešie DB savienojumi nav paredzēti lielam lietotāju skaitam.
-15. **Kriptogrāfija:** Pašizgudroti risinājumi var būt nedrošāki par standartiem.
-16. **Kļūdu apstrāde:** Nekonsekventi kļūdu dialogi dažādās sistēmas vietās.
-17. **Stringly-typed:** Klasifikatoru nosaukumi kā virknes apgrūtina refaktorēšanu.
-18. **Dokumentācija:** Milzīgs `.txt` fails ātri kļūs novecojis.
-19. **Kvalitātes garantija: Ieviesta visaptveroša testēšanas piramīda (200+ testi), kas aptver stresa, drošības un datu integritātes scenārijus.
-20. **Tehnoloģiskais risks:** JavaFX apgrūtina jaunu izstrādātāju piesaisti.
+### 📊 Dokumentācija un atskaites
+- Protokolu izveide un pārvaldība
+- Sarunu apraksti
+- Novērtēšanas kartes
+- Eksports uz Excel formātu
 
-#### 🟢 ARHITEKTA ATBILDE (20 Argumenti pamatojumam)
-1. **Drošība:** Sistēma garantē pieejamību bez interneta un datu palikšanu iestādē.
-2. **Fiziskā kontrole:** Piesaiste darbstacijai atvieglo darbu slēgtās iestādēs.
-3. **Veiktspēja:** Izvairīšanās no ORM maģijas ļauj rakstīt optimizētu SQL.
-4. **Integritāte:** Centralizēts kontrolieris nodrošina datu vienotību starp cilnēm.
-5. **Atsaucība:** Standarta `Task` mehānismi nodrošina precīzu UI kontroli.
-6. **Vienkāršība:** Manuāla injekcija ir caurskatāma un palielina ātrdarbību.
-7. **Autonomija:** Lietotne pati sevi atjaunina bez IT speciālista klātbūtnes.
-8. **Noturība:** "Fallback" saraksti garantē darba nepārtrauktību pie kļūdām.
-9. **Uzticamība:** `mysqldump` ir industrijas standarts datu drošībai.
-10. **Iteratīva izstrāde:** Skaidrs attīstības plāns, nebloķējot MVP izlaidi.
-11. **Kešatmiņa:** Ielāde startā nodrošina momentānu sarakstu atvēršanu.
-12. **Precizitāte:** Manuāla kontrole novērš viltus brīdinājumus par saglabāšanu.
-13. **Efektivitāte:** "Visi dara visu" modelis atbilst SAC darba realitātei.
-14. **Mērķtiecība:** LAN tīklam tiešie savienojumi sniedz viszemāko latentumu.
-15. **Licencēšana:** Autonoma parakstu pārbaude strādā bez ārēja servera.
-16. **Konteksts:** Kļūdu paziņojumi sniedz specifiskas instrukcijas lietotājam.
-17. **Elastība:** Virknes ļauj pievienot klasifikatorus bez pārkompilēšanas.
-18. **Atbilstība:** Detalizēta specifikācija ir obligāta prasība auditiem.
-19. **Fokuss:** Lietotnē prioritāte ir GUI integrācijas testi, nevis Unit testi.
-20. **Stabilitāte:** JavaFX ir stabila LTS tehnoloģija "Rich Client" lietotnēm.
+### 🔧 Administratora rīki
+- Datu imports un eksports
+- Datubāzes rezerves kopiju pārvaldība
+- Lietotāju tiesību pārvaldība
+- Sistēmas konfigurācija
+- Darbību žurnāla pārvaldība
 
 ---
 
-<a name="english"></a>
-## 🇬🇧 English Version
+## Sistēmas prasības
 
-### 🛡️ System Description
-A specialized desktop application designed to digitize and automate client data management for social care centers (SCC). It ensures full lifecycle management of client cases – from admission to discharge, based on 13+ years of professional experience.
+### Operētājsistēma
+- **Windows 10/11** (64-bit) - ieteicamā
+- **Linux** (Ubuntu 20.04+) - atbalstīta
+- **macOS** (10.15+) - atbalstīta
 
-* **Version:** 2.0.0
-* **Type:** Desktop Application
-* **Tech Stack:** Java 21 (LTS), JavaFX 21, MySQL 8.0+
+### Java
+- **Java 21 LTS** (obligāta)
+- **JavaFX 21** (iekļauta)
 
-### 🚀 Features
+### Aparatūras prasības
+- **Procesors:** 2 cores @ 2.0 GHz (minimums), 4 cores @ 2.5 GHz (ieteicams)
+- **Atmiņa:** 4 GB RAM (minimums), 8 GB RAM (ieteicams)
+- **Diska vieta:** 50 GB SSD (minimums), 100 GB SSD (ieteicams)
+- **Tīkls:** 100 Mbps (minimums), 1 Gbps (ieteicams)
 
-* **🏠 Dashboard:** Upcoming birthdays, client statistics, document deadline alerts.
-* **📇 Client Management:** Registry with ID verification, social anamnesis, assessments.
-* **📝 Planning:** Care and rehabilitation plans, protocols, automatic Excel export.
-* **💊 Medicine:** Health cards (ICD-10), medication center and order history.
-* **📊 Analytics:** Demographics, length of stay, and specialist workload analysis.
-
----
-
-### ⚖️ Technical Discussion: Risks and Rationale
-
-#### 🔴 SKEPTIC'S VIEW (20 Reasons for criticism)
-1. **No Cloud:** Tied to hardware, preventing remote teamwork.
-2. **Weak Security:** Passwords linked to `pc_name` are easily bypassed.
-3. **Direct JDBC:** Manual SQL is outdated and hard to maintain.
-4. **God Classes:** Large controllers increase the risk of bugs.
-5. **Threading:** Manual `Task` management can freeze the UI.
-6. **No DI Framework:** Manual injection makes code fragile.
-7. **Dangerous Migration:** `SchemaManager` alters schema in production.
-8. **Controller Hacks:** Fallback logic bypasses service layers.
-9. **External Deps:** Reliance on `mysqldump.exe` availability.
-10. **Incomplete:** Core controllers contain many `// TODO` tags.
-11. **Inefficient Loading:** Loading everything at startup slows down launch.
-12. **Dirty State:** Manual `isDirty` flags are unpredictable.
-13. **Simple Roles:** Basic user/admin model lacks organization depth.
-14. **Scalability:** Direct DB connections are not for high user counts.
-15. **Custom Crypto:** In-house solutions are potentially insecure.
-16. **Error Handling:** Inconsistent error dialogs across the system.
-17. **Stringly-typed:** Using strings for classifiers hinders refactoring.
-18. **Documentation:** Massive `.txt` files become obsolete quickly.
-19. **Quality Assurance** Comprehensive testing suite (200+ tests) covering stress, security, and data integrity scenarios.
-20. **Tech Risk:** JavaFX makes it hard to find new developers.
-
-#### 🟢 ARCHITECT'S RESPONSE (20 Counter-arguments)
-1. **Security:** 99.9% availability without internet; data stays local.
-2. **Physical Control:** Hardware linking is ideal for closed environments.
-3. **Performance:** Avoiding ORM magic allows for optimized SQL queries.
-4. **Integrity:** Centralized controllers ensure cross-tab data consistency.
-5. **Responsiveness:** Task mechanisms provide precise UI update control.
-6. **Simplicity:** Manual injection is transparent and fast.
-7. **Autonomy:** The app handles updates without IT assistance.
-8. **Resilience:** Fallbacks ensure work continues during DB errors.
-9. **Reliability:** `mysqldump` is the industry standard for backups.
-10. **Iterative:** Clear roadmap for growth without blocking MVP.
-11. **Caching:** Eager loading makes daily operations instantaneous.
-12. **Precision:** Manual control prevents false "save" warnings.
-13. **Efficiency:** "Everyone does everything" fits real SCC workflows.
-14. **Focus:** Direct connections offer lowest latency for LAN setups.
-15. **Licensing:** RSA signatures work without external servers.
-16. **Context:** Error messages provide actionable user instructions.
-17. **Flexibility:** Strings allow data changes without recompiling code.
-18. **Compliance:** Detailed documentation is required for audits.
-19. **Focus:** UI integration testing is prioritized over Unit tests.
-20. **Stability:** JavaFX is a mature LTS technology for desktop apps.
+### Datu bāze
+- **MySQL Server 8.0+** (centrālā datubāze)
+- **SQLite** (lokālā datubāze, iekļauta)
 
 ---
 
-### 👤 Author
-**Dāvis Strazds**
-Email: `davisstrazds@gmail.com` | Phone: `+371 26482667`
+## Instalācija
+
+### 1. Java instalācija
+1. Lejupielādējiet un instalējiet **Java 21 LTS**
+2. Pārbaudiet instalāciju:
+   ```bash
+   java -version
+   ```
+
+### 2. MySQL datubāzes iestatīšana
+1. Instalējiet **MySQL Server 8.0+**
+2. Izveidojiet datubāzi:
+   ```sql
+   CREATE DATABASE klientu_registrs CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+3. Izveidojiet lietotāju:
+   ```sql
+   CREATE USER 'klientu_registrs'@'localhost' IDENTIFIED BY 'parole';
+   GRANT ALL PRIVILEGES ON klientu_registrs.* TO 'klientu_registrs'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+
+### 3. Aplikācijas instalācija
+1. Lejupielādējiet aplikācijas instalācijas failu
+2. Palaidiet instalācijas programmu
+3. Sekojiet instalācijas vednim
+4. Pēc instalācijas palaidiet aplikāciju
+
+### 4. Pirmā palaišana
+1. Palaidiet aplikāciju
+2. Tiks parādīts licences iestatīšanas logs
+3. Ievadiet licences atslēgu
+4. Konfigurējiet datubāzes savienojumu
+5. Izveidojiet administratora kontu
+
+---
+
+## Lietošana
+
+### Pieteikšanās
+1. Palaidiet aplikāciju
+2. Ievadiet lietotājvārdu un paroli
+3. Nospiediet "Pieteikties"
+
+### Galvenais panelis
+Pēc veiksmīgas pieteikšanās tiks parādīts galvenais panelis ar pieejamajām funkcijām atkarībā no lietotāja lomas.
+
+### Klientu pārvaldība
+1. Nospiediet "Klienti" -> "Klientu saraksts"
+2. Lai pievienotu klientu, nospiediet "Pievienot klientu"
+3. Aizpildiet nepieciešamos laukus
+4. Nospiediet "Saglabāt"
+
+### Klienta karte
+1. Klientu sarakstā izvēlieties klientu
+2. Nospiediet "Atvērt karti"
+3. Klienta kartē var rediģēt:
+   - Pamatinformāciju
+   - Ģimenes locekļus
+   - Aprūpes plānus
+   - Veselības karti
+   - Protokolus
+   - Sarunu aprakstus
+
+### Datu eksports
+1. Atveriet vajadzīgo sadaļu
+2. Nospiediet "Eksportēt"
+3. Izvēlieties eksporta formātu (Excel)
+4. Saglabājiet failu
+
+---
+
+## Lomas un tiesības
+
+### Administrator (ADMIN)
+- Pilna piekļuve visām funkcijām
+- Lietotāju pārvaldība
+- Datubāzes pārvaldība
+- Sistēmas konfigurācija
+
+### Menedžeris (MANAGER)
+- Klientu pārvaldība
+- Atskaišu veidošana
+- Personāla pārvaldība
+
+### Sociālais darbinieks (SOCIAL_WORKER)
+- Klientu datu rediģēšana
+- Aprūpes plāni
+- Nodarbību pārvaldība
+
+### Medicīniskais personāls (MEDICAL_STAFF)
+- Veselības kartes
+- Medikamentu pieprasījumi
+- Medicīniskā statistika
+
+### Sociālais aprūpētājs (SOCIAL_CAREGIVER)
+- Klientu datu skatīšana
+- Nodarbību reģistrēšana
+- Pamatinformācijas rediģēšana
+
+### Tikai lasīšanas tiesības (ADMIN_READ_ONLY, SOCIAL_READ_ONLY)
+- Datu skatīšana bez rediģēšanas tiesībām
+
+---
+
+## Datu drošība
+
+### Šifrēšana
+- Visi sensitīvi dati tiek šifrēti ar AES-256
+- Paroles tiek šifrētas ar salt
+- Licences dati tiek aizsargāti
+
+### Rezerves kopijas
+- Automātiskas ikdienas rezerves kopijas
+- Manuālu rezerves kopiju izveide
+- Veco rezerves kopiju dzēšana
+
+### Audita žurnāls
+- Visas darbības tiek reģistrētas
+- Lietotāju darbību izsekošana
+- Kļūdu un brīdinājumu reģistrēšana
+
+---
+
+## Atbalsts
+
+### Kļūdu ziņošana
+1. Atveriet "Palīdzība" -> "Kļūdu ziņošana"
+2. Aprakstiet problēmu
+3. Pievienojiet žurnālfailus (ja nepieciešams)
+4. Nosūtiet ziņojumu
+
+### Žurnālfaili
+Žurnālfaili atrodas mapē:
+```
+.klientu_registrs/logs/
+├── application.log
+├── error.log
+└── audit.log
+```
+
+### Tehniskā atbalsta informācija
+- **E-pasts:** support@klienturegistrs.lv
+- **Tālrunis:** +371 XXXXXXXX
+- **Darba laiks:** Darbdienās 9:00-17:00
+
+---
+
+## Atjauninājumi
+
+### Automātiskie atjauninājumi
+Aplikācija automātiski pārbauda atjauninājumus katru reizi, kad tiek palaista.
+
+### Manuālie atjauninājumi
+1. Atveriet "Palīdzība" -> "Pārbaudīt atjauninājumus"
+2. Sekojiet norādījumiem
+
+---
+
+## Licence
+
+Šī programma ir licencēta saskaņā ar komerciālās licences noteikumiem. Lai iegūtu licenci, sazinieties ar pārdevēju.
+
+### Licences pārbaude
+Licences statusu var pārbaudīt:
+1. Atveriet "Palīdzība" -> "Par licenci"
+2. Skatiet licences informāciju
+
+---
+
+## Dzēšana
+
+### Windows
+1. Atveriet "Programmas un funkcijas"
+2. Atrodiet "Klientu Reģistrs"
+3. Nospiediet "Noņemt"
+4. Sekojiet dzēšanas vednim
+
+### Datu dzēšana
+Lai pilnībā dzēstu visus datus:
+1. Dzēšiet aplikāciju
+2. Dzēšanai datu mapi: `%USERPROFILE%\.klientu_registrs`
+3. Dzēšanai MySQL datubāzi (ja nepieciešams)
+
+---
+
+## Dokumentācija
+
+Pilna dokumentācija ir pieejama mapē `DOKUMENTACIJA/`:
+
+- **`LIETOTAJA_ROKASGRAMATA_SOCIAL.md`** - Sociālā darbinieka rokasgrāmata
+- **`LIETOTAJA_ROKASGRAMATA_MEDIC.md`** - Medicīniskā darbinieka rokasgrāmata
+- **`LIETOTAJA_ROKASGRAMATA_ADMIN.md`** - Administratora rokasgrāmata
+- **`ARHITEKTURA.md`** - Sistēmas arhitektūra
+- **`API_DOKUMENTACIJA.md`** - API dokumentācija
+- **`TEHNISKA_DOKUMENTACIJA.md`** - Tehniskā dokumentācija
+- **`DATUBAZES_SHEMA.md`** - Datubāzes shēma
+- **`IZVIETOSANAS_INSTRUKCIJAS.md`** - Izvietošanas instrukcijas
+
+---
+
+## Autortiesības
+
+© 2024 Dāvis Strazds. Visas tiesības aizsargātas.
+
+Šī programmatūra ir aizsargāta ar autortiesību likumiem un starptautiskiem līgumiem. Bez atļaujas ir aizliegts kopēt, modificēt, izplatīt vai izmantot šo programmatūru.
+
+---
+
+## Pēdējie izmaiņu
+
+### Versija 2.1.0 (2026.03.05)
+- Papildināta datu eksporta funkcionalitāte
+- Uzlabāta veiktspēja
+- Labota kļūdu apstrāde
+- Atjaunināta dokumentācija
+
+### Versija 2.0.0 (2025.12.01)
+- Jauna licences sistēma
+- Papildināta drošība
+- Jauna UI dizains
+- SQLite atbalsts
+
+### Versija 1.0.0 (2024.06.15)
+- Pirmā publiskā versija
+- Pamata funkcionalitāte
+- MySQL atbalsts
+
+---
+
+**Paldien, ka izvēlējāties Klientu Reģistrs!** 🎯

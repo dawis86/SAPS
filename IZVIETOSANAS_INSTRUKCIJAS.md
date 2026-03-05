@@ -1,812 +1,580 @@
-# Klientu Reģistrs - Izvietošanas un Uzturēšanas Instrukcijas
+# Klientu Reģistrs - Izvietošanas Instrukcijas
 
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
+**Pārbaudīts:** 2026.03.05  
 
 ---
 
 ## SATURA RĀDĪTĀJS
 
-1. [PRIEKŠNOSACĪMI](#1-priekšnosacīmi)
+1. [IZVIETOŠANAS PĀRSKATS](#1-izvietošanas-pārskats)
 2. [SISTĒMAS PRASĪBAS](#2-sistēmas-prasības)
-3. [INSTALĀCIJA](#3-instalācija)
-4. [KONFIGURĀCIJA](#4-konfigurācija)
-5. [PIRMĀ PALAIŠANA](#5-pirmā-palaišana)
-6. [LIETOTĀJU PĀRVALDĪBA](#6-lietotāju-pārvaldība)
-7. [DATU BĀZES IESTATĪŠANA](#7-datu-bāzes-iestatīšana)
-8. [REZERVES KOPIJU VADĪBA](#8-rezerves-kopiju-vadība)
-9. [PROBLĒMU NOVĒRŠANA](#9-problēmu-novēršana)
-10. [UZTURĒŠANA UN ATJAUNINĀŠANA](#10-uzturēšana-un-atjaunināšana)
+3. [DATU BĀZES IESTATĪŠANA](#3-datu-bāzes-iestatīšana)
+4. [APLIKĀCIJAS INSTALĀCIJA](#4-aplikācijas-instalācija)
+5. [KONFIGURĀCIJA](#5-konfigurācija)
+6. [LICENCĒŠANA](#6-licencēšana)
+7. [TESTĒŠANA UN VERIFIKĀCIJA](#7-testēšana-un-verifikācija)
+8. [APMAINTENANCE](#8-apmaintenance)
+9. [KĻŪDU NOVĒRŠANA](#9-kļūdu-novēršana)
 
 ---
 
-## 1. PRIEKŠNOSACĪMI
+## 1. IZVIETOŠANAS PĀRSKATS
 
-### 1.1. Dokumenta mērķis
+### 1.1. Arhitektūra (faktiskā)
 
-Šī instrukcija ir paredzēta sistēmas administratoriem, IT speciālistiem un tehniskajiem atbalsta darbiniekiem. Tā satur pilnu informāciju par "Klientu Reģistrs" sistēmas uzstādīšanu, konfigurēšanu un uzturēšanu.
+**Klientu Reģistrs** ir JavaFX desktop aplikācija ar klientu-servera arhitektūru:
 
-### 1.2. Mērķa auditorijas
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    KLIENTU STACIJA                        │
+│ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────┐ │
+│ │ JavaFX App  │ │ Local SQLite │ │   Configuration   │ │
+│ │ (Client)    │ │ (Cache)      │ │   Files           │ │
+│ └─────────────┘ └─────────────┘ └─────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                         Network (TCP/IP)
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                     SERVERA PUSE                           │
+│ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────┐ │
+│ │ MySQL Server │ │ File System │ │   Backup Storage    │ │
+│ │ (Primary DB) │ │ (Templates)  │ │   (Archives)       │ │
+│ └─────────────┘ └─────────────┘ └─────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
 
-- **Sistēmas administrators:** Atbildīgi par sistēmas tehnisko stāvokli
-- **IT speciālisti:** Atbildīgi par infrastruktūru un drošību
-- **Lietotāju pārvaldītāji:** Atbildīgi par lietotāju kontiem un piekļuvi
-- **Medicīniskais personāls:** Atbildīgs par medicīnisko datu pārvaldību
+### 1.2. Izvietošanas modeļi
 
-### 1.3. Sistēmas versijas
+**Modeļis 1: Standalone (viena stacija)**
+- Viena JavaFX aplikācija
+- Lokālā MySQL datubāze
+- Nav nepieciešams tīkls
 
-- **Pašreizējā versija:** 2.1.0
-- **Java versija:** 21 (LTS)
-- **JavaFX versija:** 21.0.2
-- **MySQL versija:** 8.0+
-- **Operētājsistēma:** Windows 10/11 (64-bit)
+**Modeļis 2: Multi-user (vairākas stacijas)**
+- Vairākas JavaFX klientu stacijas
+- Kopēja MySQL datubāze
+- Nepieciešams lokālais tīkls
+
+**Modeļis 3: Enterprise (liela mēroga)**
+- Vairākas klientu stacijas
+- MySQL cluster ar replicāciju
+- Load balancer
+- Backup serveris
 
 ---
 
 ## 2. SISTĒMAS PRASĪBAS
 
-### 2.1. Minimālās prasības
+### 2.1. Aparatūras prasības (faktiskās)
 
-#### 2.1.1. Servera prasības
+**Minimālās prasības (viena lietotājs):**
+- **Procesors:** Intel Core i3 / AMD Ryzen 3 @ 2.0 GHz
+- **Atmiņa:** 4 GB RAM
+- **Diska vieta:** 50 GB SSD
+- **Tīkls:** 100 Mbps (ja ir datubāzes serveris)
 
-| Komponents | Minimālā | Ieteicamā | Piezīmes |
-|-----------|-----------|------------|----------|
-| Procesors | Intel Core i3 | Intel Core i5 | Intel Core i7 |
-| RAM | 4 GB | 8 GB | 16 GB |
-| Diska vieta | 50 GB SSD | 100 GB SSD | 200 GB SSD |
-| Tīkls | 100 Mbps | 1 Gbps | 1 Gbps |
+**Ieteicamās prasības (vairāki lietotāji):**
+- **Procesors:** Intel Core i5 / AMD Ryzen 5 @ 2.5 GHz
+- **Atmiņa:** 8 GB RAM
+- **Diska vieta:** 100 GB SSD
+- **Tīkls:** 1 Gbps
 
-#### 2.1.2. Klienta darbstacijas prasības
-
-| Komponents | Minimālā | Ieteicamā |
-|-----------|-----------|------------|
-| Procesors | Intel Core i3 | Intel Core i5 |
-| RAM | 4 GB | 8 GB |
-| Diska vieta | 2 GB | 5 GB |
-| Java Runtime | JRE 21 | JDK 21 |
+**Servera prasības (MySQL serveris):**
+- **Procesors:** Intel Core i7 / AMD Ryzen 7 @ 3.0 GHz
+- **Atmiņa:** 16 GB RAM
+- **Diska vieta:** 500 GB SSD
+- **Tīkls:** 1 Gbps
 
 ### 2.2. Programmatūras prasības
 
-#### 2.2.1. Nepieciešamā programmatūra
+**Klienta stacija:**
+- **Windows 10/11** (64-bit) - ieteicamā
+- **Linux** (Ubuntu 20.04+) - atbalstīta
+- **macOS** (10.15+) - atbalstīta
+- **Java 21 LTS** (obligāta)
 
-- **Java Runtime Environment (JRE) 21 vai jaunāka**
-- **MySQL Server 8.0+** (centralizētai datubāzei)
-- **Windows 10/11** (64-bit arhitektūra)
-
-#### 2.2.2. Ieteicamā papildus programmatūra
-
-- **MySQL Workbench** (datubāzes pārvaldībai)
-- **Git** (versiju kontrolei)
-- **Visual Studio Code** (koda rediģēšanai)
-- **Advanced Installer** (installeru veidošanai)
+**Serveris:**
+- **Windows Server 2019+** vai **Linux Server** (Ubuntu 20.04+)
+- **MySQL Server 8.0+**
+- **OpenSSH** (attālā piekļuvei)
 
 ---
 
-## 3. INSTALĀCIJA
+## 3. DATU BĀZES IESTATĪŠANA
 
-### 3.1. Priekšsagatavošana
+### 3.1. MySQL servera instalācija
 
-#### 3.1.1. Java instalācija
+**Windows:**
+1. Lejupielādējiet MySQL Installer no [mysql.com](https://dev.mysql.com/downloads/installer/)
+2. Palaidiet instalāciju
+3. Izvēlieties "Server only"
+4. Konfigurējiet:
+   - **Port:** 3306 (standarta)
+   - **Root password:** izveidojiet drošu paroli
+   - **Authentication Type:** Use Strong Password Encryption
+5. Pabeidziet instalāciju
 
-1. **Lejupielādēt JRE 21:**
-   - Atveriet https://adoptium.net/openjdk
-   - Lejupielādēt "OpenJDK 21 Windows x64"
-   - Palaidiet instalācijas programmu
-   - Ievērošiet instalācijas ceļu
-   - Iestatiet JAVA_HOME vides mainīgo
+**Linux (Ubuntu):**
+```bash
+# Atjaunināt pakotnes
+sudo apt update
 
-2. **Pārbaudiet instalāciju:**
-   ```bash
-   java -version
-   echo %JAVA_HOME%
-   ```
+# Instalēt MySQL serveri
+sudo apt install mysql-server
 
-#### 3.1.2. MySQL Server instalācija
+# Drošināt instalāciju
+sudo mysql_secure_installation
 
-1. **Lejupielādēt MySQL 8.0:**
-   - Atveriet https://dev.mysql.com/downloads/mysql/
-   - Lejupielādēt "MySQL Community Server 8.0.x"
-   - Izvēlieties "Windows x64" instalāciju
+# Pārbaudīt statusu
+sudo systemctl status mysql
+```
 
-2. **Instalācijas konfigurācija:**
-   - Izvēlieties "Developer Default"
-   - Iestatiet root parole (saglabājiet drošā vietā)
-   - Pabeidziet instalāciju
+### 3.2. Datubāzes izveide
 
-3. **Pārbaudiet MySQL darbību:**
-   ```bash
-   mysql --version
-   ```
-
-### 3.2. Datubāzes sagatavošana
-
-#### 3.2.1. Datubāzes izveide
-
+**Izveidojiet datubāzi:**
 ```sql
--- Pieslēdzieties MySQL kā root lietotājs
+-- Pieslēdzieties MySQL
 mysql -u root -p
 
--- Izveido datubāzi
-CREATE DATABASE socialcare_db 
-CHARACTER SET utf8mb4 
-COLLATE utf8mb4_unicode_ci;
+-- Izveidojiet datubāzi
+CREATE DATABASE klientu_registrs CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- Izveido lietotāju
-CREATE USER 'socialcare'@'localhost' IDENTIFIED BY 'secure_password';
-GRANT ALL PRIVILEGES ON socialcare_db.* TO 'socialcare'@'localhost';
+-- Izveidojiet lietotāju
+CREATE USER 'klientu_registrs'@'localhost' IDENTIFIED BY 'droša_parole';
+GRANT ALL PRIVILEGES ON klientu_registrs.* TO 'klientu_registrs'@'localhost';
 FLUSH PRIVILEGES;
+
+-- Izveidojiet lietotāju attālai piekļuvei (ja nepieciešams)
+CREATE USER 'klientu_registrs'@'%' IDENTIFIED BY 'droša_parole';
+GRANT ALL PRIVILEGES ON klientu_registrs.* TO 'klientu_registrs'@'%';
+FLUSH PRIVILEGES;
+
+-- Izietiet
+EXIT;
 ```
 
-#### 3.2.2. Datubāzes pārbaude
+### 3.3. MySQL konfigurācija
 
-```sql
--- Pārbaudiet datubāzi
-USE socialcare_db;
+**Rediģējiet `my.cnf` (Linux) vai `my.ini` (Windows):**
+```ini
+[mysqld]
+# Galvenie iestatījumi
+port = 3306
+bind-address = 0.0.0.0
+max_connections = 200
+innodb_buffer_pool_size = 1G
+innodb_log_file_size = 256M
+innodb_flush_log_at_trx_commit = 2
 
--- Pārbaudiet rakstzīmju
-SHOW TABLES;
+# Rakstzīmju kodējums
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
 
--- Pārbaudiet kodējumu
-SHOW VARIABLES LIKE 'character_set%';
-SHOW VARIABLES LIKE 'collation%';
+# Žurnālieraksti
+log-error = /var/log/mysql/error.log
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time = 2
+
+# Backup iestatījumi
+expire_logs_days = 7
+max_binlog_size = 100M
 ```
 
-### 3.3. Lietotnes izplatīšana
-
-#### 3.3.1. JAR faila izveide
-
-1. **Pārbaudiet, ka ir Maven:**
-   ```bash
-   mvn --version
-   ```
-
-2. **Būvējiet aplikāciju:**
-   ```bash
-   cd klientu-registrs-app
-   mvn clean package
-   ```
-
-3. **Izveido izplatīšanas mapi:**
-   ```bash
-   mkdir -p "C:\Program Files\KlientuRegistrs"
-   copy target\klientu-registrs-2.1.0.jar "C:\Program Files\KlientuRegistrs\"
-   copy -r target\lib "C:\Program Files\KlientuRegistrs\"
-   ```
-
-#### 3.3.2. Windows izveidotājs (opcional)
-
-1. **Izmantojiet Inno Setup**
-2. **Konfigurējiet izveidotāju:**
-   - Programmas nosaukums: "Klientu Reģistrs"
-   - Instalācijas mape: `C:\Program Files\KlientuRegistrs`
-   - Iekļaut saīsnes uz programmu
-   - Iestatiet izveidotāja informāciju
-
----
-
-## 4. KONFIGURĀCIJA
-
-### 4.1. Datubāzes konfigurācija
-
-#### 4.1.1. Konfigurācijas fails izveide
-
-Izveidojiet konfigurācijas failu `C:\ProgramData\KlientuRegistrs\db_config.properties`:
-
-```properties
-# Datubāzes konfigurācija
-db.host=localhost
-db.port=3306
-db.database=socialcare_db
-db.username=socialcare
-db.password=secure_password
-
-# Savienojumu pūla konfigurācija
-db.pool.maxSize=20
-db.pool.minIdle=5
-db.pool.connectionTimeout=30000
-db.pool.idleTimeout=600000
-db.pool.maxLifetime=1800000
-
-# SSL konfigurācija
-db.ssl=false
-db.useUnicode=true
-db.characterEncoding=UTF-8
-```
-
-#### 4.1.2. Konfigurācijas šifrēšana
-
+**Restartējiet MySQL:**
 ```bash
-# Izveidojiet konfigurācijas šifrēšanas skriptu
-java -cp "C:\Program Files\KlientuRegistrs\lib\*" CryptoUtils \
-     -encrypt "C:\ProgramData\KlientuRegistrs\db_config.properties" \
-     -output "C:\ProgramData\KlientuRegistrs\db_config.properties.enc"
-```
+# Linux
+sudo systemctl restart mysql
 
-### 4.2. Programmas konfigurācija
-
-#### 4.2.1. Programmas iestatījumi
-
-Izveidojiet programmas iestatījumu failu `C:\ProgramData\KlientuRegistrs\app.properties`:
-
-```properties
-# Programmas konfigurācija
-app.name=Klientu Reģistrs
-app.version=2.1.0
-app.data.dir=C:\ProgramData\KlientuRegistrs
-app.language=lv_LV
-
-# Drošības iestatījumi
-app.session.timeout=1800000
-app.password.min.length=8
-app.password.require.special=true
-app.password.require.numbers=true
-
-# Sinhronizācijas iestatījumi
-sync.enabled=true
-sync.interval=5000
-sync.retry.count=3
-sync.retry.delay=1000
-
-# Rezerves kopiju iestatījumi
-backup.enabled=true
-backup.interval=86400000
-backup.retention.days=31
-backup.path=C:\ProgramData\KlientuRegistrs\backups
+# Windows
+net stop mysql
+net start mysql
 ```
 
 ---
 
-## 5. PIRMĀ PALAIŠANA
+## 4. APLIKĀCIJAS INSTALĀCIJA
 
-### 5.1. Pirmās palaišanas vednis
+### 4.1. Java instalācija
 
-#### 5.1.1. Licences aktivizācija
-
-1. **Palaidiet programmu:**
-   ```bash
-   java -jar "C:\Program Files\KlientuRegistrs\klientu-registrs-2.1.0.jar"
+**Windows:**
+1. Lejupielādējiet Java 21 LTS no [oracle.com](https://www.oracle.com/java/technologies/downloads/)
+2. Palaidiet instalāciju
+3. Pārbaudiet instalāciju:
+   ```cmd
+   java -version
    ```
 
-2. **Licences aktivizācijas logs:**
-   - Ievadietiet licences atslēgu
-   - Ievadietiet iestādes nosaukumu
-   - Ievadietiet administratora kontu informāciju
-   - Apstipriniet licences noteikumus
-
-#### 5.1.2. Datubāzes savienojuma konfigurācija
-
-1. **Datubāzes savienojuma logs:**
-   - Servera adrese: `localhost`
-   - Ports: `3306`
-   - Datubāzes nosaukums: `socialcare_db`
-   - Lietotājvārds: `socialcare`
-   - Parole: `secure_password`
-
-2. **Savienojuma pārbaude:**
-   - Sistēma automātiski pārbauda savienojumu
-   - Ja savienojums neizdodas, parādīs kļūdu ziņojumu
-
-### 5.2. Sākotnējā datu ielāde
-
-#### 5.2.1. Klasifikatoru ielāde
-
-Ja datubāze ir tukša, sistēma automātiski ielādēs sākotnējos datus:
-
-1. **Iestādes informācija:**
-   - Iestādes nosaukums
-   - Adrese
-   - Tālrunis
-   - E-pasts
-
-2. **Klasifikatori:**
-   - Aktivitāšu veidi
-   - Nodarbību speciālisti
-   - Statusu veidi
-   - Lomas un tiesības
-
-3. **Pārbaude:**
-   - Pārbaudiet, vai visi klasifikatori ir ielādēti
-   - Pārbaudiet, vai dati ir korekti
-
----
-
-## 6. LIETOTĀJU PĀRVALDĪBA
-
-### 6.1. Administratora konta izveide
-
-#### 6.1.1. Pirmā administratora konta
-
-1. **Atveriet programmu**
-2. **Izveidojiet administratora kontu:**
-   - Lietotājvārds: `admin`
-   - Parole: `admin123` (pirmajā palaišanai)
-   - Pilns vārds: `Sistēmas Administrators`
-   - Loma: `ADMIN`
-
-3. **Mainiet paroli pēc pirmās pieslēgšanās:**
-   - Dodatieties lietotājvārds: `admin`
-   - Ievadietiet stipru paroli (minimums 8 simboli, lielie/mazie burti, cipari)
-
-### 6.2. Lietotāju kontu izveide
-
-#### 6.2.1. Standarta lietotāja konts
-
-1. **Atveriet lietotāju pārvaldību:**
-   - Galvenais panelis → Admin Rīki → Lietotāju pārvaldība
-
-2. **Izveidojiet jaunu lietāju:**
-   - Lietotājvārds: `jberzins`
-   - Pilns vārds: `Jānis Bērziņš`
-   - Epasts: `jberzins@socialcare.lv`
-   - Loma: `USER` vai `MEDIC`
-
-3. **Piešķiriet lomas tiesības:**
-   - **USER:** Klientu datu lasīšana un rediģēšana
-   - **MEDIC:** Papildus piekļuve medicīniskajiem datiem
-   - **MANAGER:** Paplašināta piekļuve un atskaites
-
-### 6.3. Lomas un tiesību matrica
-
-| Loma | Klienti | Plāni | Medikamenti | Nodarbības | Admin rīki |
-|------|--------|-------|------------|------------|-----------|
-| ADMIN | ✅ ✅ ✅ | ✅ ✅ ✅ | ✅ ✅ ✅ | ✅ ✅ ✅ |
-| MANAGER | ✅ ✅ ✅ | ✅ ✅ ✅ | ✅ ✅ ✅ | ❌ ❌ ❌ |
-| USER | ✅ ✅ ✅ | ✅ ✅ ✅ | ✅ ✅ ✅ | ❌ ❌ ❌ |
-| MEDIC | ❌ ❌ ❌ | ❌ ❌ ❌ | ✅ ✅ ✅ | ❌ ❌ ❌ |
-
----
-
-## 7. DATU BĀZES IESTATĪŠANA
-
-### 7.1. Shēmas migrācija
-
-#### 7.1.1. Automātiskā shēmas izveide
-
-1. **Programma pārbauda shēmas versiju:**
-   - Pārbauda `configuration` tabulu
-   - Salīdzina esošo versiju ar vajadzīgo
-
-2. **Ja nepieciešams, izveido jaunu shēmu:**
-   - Izveido visas tabulas
-   - Izveido indeksus
-   - Ielādē sākotnējos datus
-
-#### 7.1.2. Shēmas migrācijas skripts
-
-```sql
--- Shēmas migrācijas skripts (v4.0 → v5.0)
--- Izpildes laiks: 2024-01-15
-
--- 1. Jaunas kolonnas klientu tabulai
-ALTER TABLE klienti 
-ADD COLUMN laboja_lietotajs VARCHAR(50) AFTER labots;
-
--- 2. Jaunas tabulas
-CREATE TABLE novērtēšanas_kartes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    klienta_id INT NOT NULL,
-    veids ENUM('BĀZES', 'DINAMIKAS') NOT NULL,
-    datums DATE NOT NULL,
-    novērtētājs VARCHAR(100) NOT NULL,
-    izveidots TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    labots TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    laboja_lietotajs VARCHAR(50),
-    
-    FOREIGN KEY (klienta_id) REFERENCES klienti(id) ON DELETE CASCADE,
-    INDEX idx_klienta_veids_datums (klienta_id, veids, datums)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- 3. Konfigurācijas atjaunināšana
-UPDATE configuration 
-SET config_value = '5.0', 
-    updated_at = CURRENT_TIMESTAMP 
-WHERE config_key = 'db_version';
-```
-
-### 7.2. Sākotnējo datu ielāde
-
-#### 7.2.1. Klasifikatoru ielāde
-
-```sql
--- Aktivitāšu klasifikators
-INSERT INTO activities (nosaukums, bloks, speciālists, joma, līmenis, apraksts) VALUES
-('Vingrinājumi stāvus vietā', 'TERAPIJA', 'FIZIOTERAPEITS', 'KUSTĪBU KUSTĪBA', 'PAMATNIVELIS', 'Pamatu vingrinājumi kustību stiprināšanai'),
-('Pastaigas vingrinājumi', 'TERAPIJA', 'FIZIOTERAPEITS', 'KUSTĪBU KUSTĪBA', 'VIDĒJA', 'Pastaigas vingrinājumi'),
-('Ēšanas mācīšana', 'TERAPIJA', 'FIZIOTERAPEITS', 'PAŠAPKALPOŠANĀS', 'PAMATNIVELIS', 'Ēšanas prasmju mācīšana'),
-('Runas vingrinājumi', 'TERAPIJA', 'RUNAS TERAPEITS', 'KOMUNIKĀCIJA', 'PAMATNIVELIS', 'Runas vingrinājumi'),
-('Darbu terapija', 'TERAPIJA', 'ERGOTERAPEITS', 'PAŠAPKALPOŠANĀS', 'PAMATNIVELIS', 'Darba prasmju treniņš');
-```
-
-#### 7.2.2. Lomu definīcijas ielāde
-
-```sql
--- Lomas un tiesību definīcijas
-INSERT INTO configuration (config_key, config_value, description) VALUES
-('role.ADMIN', 'Pilna piekļuve sistēmai', 'Administratora loma ar pilnām tiesībām'),
-('role.MANAGER', 'Pārvaldība un atskaites', 'Vadītāja loma ar paplašinātām tiesībām'),
-('role.USER', 'Pamata piekļuve klientu datiem', 'Standarta lietotāja loma'),
-('role.MEDIC', 'Medicīniskā piekļuve', 'Mediķiskā personāla loma');
-```
-
----
-
-## 8. REZERVES KOPIJU VADĀBA
-
-### 8.1. Automātiskās rezerves kopijas
-
-#### 8.1.1. Rezerves kopiju grafiks
-
-Sistēma veic automātiskas rezerves kopijas katru dienu:
-
-1. **Ikdienas rezerves kopija:**
-   - Laiks: 02:00
-   - Tips: Pilna datubāzes kopija
-   - Saglabāšanas laiks: 31 dienas
-
-2. **Nedēļas rezerves kopijas:**
-   - Laiks: 12:00 un 18:00
-   - Tips: Diferenciālās kopijas
-   - Saglabāšanas laiks: 7 dienas
-
-#### 8.1.2. Rezerves kopiju konfigurācija
-
-```properties
-# Rezerves kopiju iestatījumi
-backup.enabled=true
-backup.interval=86400000
-backup.retention.days=31
-backup.path=C:\ProgramData\KlientuRegistrs\backups
-backup.compression=true
-backup.encryption=true
-```
-
-### 8.2. Rezerves kopiju skripti
-
-#### 8.2.1. Pilnas rezerves kopijas skripts
-
+**Linux (Ubuntu):**
 ```bash
+# Instalēt OpenJDK 21
+sudo apt update
+sudo apt install openjdk-21-jdk
+
+# Pārbaudīt instalāciju
+java -version
+```
+
+### 4.2. Aplikācijas izvietošana
+
+**Metode 1: Standalone JAR**
+1. Lejupielādējiet `klientu-registrs-app.jar`
+2. Izveidojiet instalācijas mapi:
+   ```bash
+   mkdir C:\KlientuRegistrs
+   cd C:\KlientuRegistrs
+   ```
+3. Ievietojiet JAR failā mapē
+4. Izveidojiet palaišanas skriptu `start.bat`:
+   ```bat
+   @echo off
+   java -Xms512m -Xmx2048m -jar klientu-registrs-app.jar
+   pause
+   ```
+
+**Metode 2: Windows Installer**
+1. Lejupielādējiet `klientu-registrs-setup.exe`
+2. Palaidiet instalāciju kā administrator
+3. Izvēlieties instalācijas mapi
+4. Sekojiet instalācijas vednim
+
+**Metode 3: Portable versija**
+1. Lejupielādējiet `klientu-registrs-portable.zip`
+2. Atarhivējiet failus
+3. Palaidiet `klientu-registrs.exe`
+
+### 4.3. Tīkla konfigurācija
+
+**Firewall iestatījumi (ja nepieciešams):**
+```bash
+# Windows PowerShell (Administrator)
+New-NetFirewallRule -DisplayName "MySQL" -Direction Inbound -Protocol TCP -LocalPort 3306 -Action Allow
+
+# Linux
+sudo ufw allow 3306/tcp
+sudo ufw reload
+```
+
+---
+
+## 5. KONFIGURĀCIJA
+
+### 5.1. Pirmā palaišana
+
+1. Palaidiet aplikāciju
+2. Tiks parādīts licences iestatīšanas logs
+3. Ievadiet licences atslēgu
+4. Nospiediet "Turpināt"
+
+### 5.2. Datubāzes konfigurācija
+
+**Tiks parādīts datubāzes konfigurācijas logs:**
+1. **Serveris:** localhost vai servera IP adrese
+2. **Ports:** 3306 (standarta)
+3. **Datubāze:** klientu_registrs
+4. **Lietotājvārds:** klientu_registrs
+5. **Parole:** ievadiet izveidoto paroli
+6. Nospiediet "Testēt savienojumu"
+7. Ja tests ir veiksmīgs, nospiediet "Saglabāt"
+
+### 5.3. Administratora konta izveide
+
+1. Pēc veiksmīgas datubāzes konfigurācijas
+2. Tiks parādīts administratora konta izveides logs
+3. Ievadiet:
+   - **Lietotājvārds:** admin
+   - **Parole:** izveidojiet drošu paroli
+   - **Vārds, uzvārds:** administratora vārds
+4. Nospiediet "Izveidot kontu"
+
+### 5.4. Iestādes informācija
+
+1. Tiks parādīts iestādes informācijas logs
+2. Ievadiet:
+   - **Iestādes nosaukums:**
+   - **Adrese:**
+   - **Telefons:**
+   - **E-pasts:**
+3. Nospiediet "Saglabāt"
+
+---
+
+## 6. LICENCĒŠANA
+
+### 6.1. Licences iegūšana
+
+1. Sazinieties ar pārdevēju
+2. Norādiet:
+   - Iestādes nosaukumu
+   - Lietotāju skaitu
+   - Instalācijas tipu (standalone/multi-user)
+3. Saņemiet licences atslēgu
+
+### 6.2. Licences instalācija
+
+1. Atveriet aplikāciju
+2. Ja licence ir nepareiza, tiks parādīts licences logs
+3. Ievadiet jauno licences atslēgu
+4. Nospiediet "Aktivizēt"
+
+### 6.3. Licences pārbaude
+
+Licences statusu var pārbaudīt:
+1. Atveriet "Palīdzība" -> "Par licenci"
+2. Skatiet licences informāciju:
+   - Licences veids
+   - Derīguma termiņš
+   - Lietotāju limits
+   - Instalācijas limits
+
+---
+
+## 7. TESTĒŠANA UN VERIFIKĀCIJA
+
+### 7.1. Pamata testēšana
+
+**1. Savienojuma testēšana:**
+```bash
+# Testēt MySQL savienojumu
+mysql -h localhost -u klientu_registrs -p klientu_registrs
+
+# Testēt tīkla savienojumu (ja attāls serveris)
+telnet mysql_server_ip 3306
+```
+
+**2. Java testēšana:**
+```bash
+# Pārbaudīt Java versiju
+java -version
+
+# Testēt JAR palaišanu
+java -jar klientu-registrs-app.jar --version
+```
+
+**3. Aplikācijas testēšana:**
+1. Palaidiet aplikāciju
+2. Pieteikieties ar administratora kontu
+3. Pārbaudiet galvenās funkcijas:
+   - Klientu pievienošana
+   - Datu meklēšana
+   - Eksports uz Excel
+   - Lietotāju pārvaldība
+
+### 7.2. Veiktspējas testēšana
+
+**1. Datubāzes veiktspēja:**
+```sql
+-- Pārbaudīt savienojumu skaitu
+SHOW STATUS LIKE 'Threads_connected';
+
+-- Pārbaudīt vaicājumu veiktspēju
+SELECT * FROM information_schema.processlist;
+
+-- Pārbaudīt datubāzes izmēru
+SELECT table_schema AS 'Database',
+       ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Size (MB)'
+FROM information_schema.tables
+WHERE table_schema = 'klientu_registrs'
+GROUP BY table_schema;
+```
+
+**2. Aplikācijas veiktspēja:**
+- Monitorējiet RAM izmantošanu
+- Pārbaudiet CPU noslodzes
+- Testējiet ar vairākiem lietotājiem vienlaikus
+
+### 7.3. Integrācijas testēšana
+
+**1. Datu sinhronizācija:**
+- Izveidojiet testu klientu
+- Pārbaudiet, ka dati tiek saglabāti MySQL
+- Pārbaudiet, ka dati tiek kešoti SQLite
+
+**2. Eksporta testēšana:**
+- Eksportējiet klienta karti
+- Pārbaudiet Excel faila saturu
+- Pārbaudiet, ka visi dati ir pareizi
+
+---
+
+## 8. APMAINTENANCE
+
+### 8.1. Regulāra uzturēšana
+
+**Ikdienas uzdevumi:**
+- Pārbaudīt aplikācijas darbību
+- Pārbaudīt žurnālfailus par kļūdām
+- Pārbaudīt datubāzes veiktspēju
+
+**Nedēļas uzdevumi:**
+- Izveidot rezerves kopijas
+- Pārbaudīt diskas vietu
+- Pārbaudīt lietotāju aktivitāti
+
+**Mēneša uzdevumi:**
+- Atjaunināt sistēmu
+- Pārbaudīt licences statusu
+- Optimizēt datubāzi
+
+### 8.2. Rezerves kopijas
+
+**Automātiskās rezerves kopijas:**
+```bash
+# Izveidojiet backup skriptu backup_mysql.sh
 #!/bin/bash
-# Pilnas rezerves kopijas skripts
-BACKUP_FILE="socialcare_db_backup_$(date +%Y%m%d_%H%M%S).sql"
+DATE=$(date +%Y%m%d_%H%M%S)
+BACKUP_DIR="/backup/mysql"
+DB_NAME="klientu_registrs"
 
-# Konfigurācija
-DB_HOST="localhost"
-DB_PORT="3306"
-DB_NAME="socialcare_db"
-DB_USER="backup_user"
-DB_PASS="secure_password"
+# Izveidojiet mapi
+mkdir -p $BACKUP_DIR
 
-# Rezerves kopijas izveide
-mysqldump \
-    --host=$DB_HOST \
-    --port=$DB_PORT \
-    --user=$DB_USER \
-    --password=$DB_PASS \
-    --single-transaction \
-    --routines \
-    --triggers \
-    --databases \
-    $DB_NAME > $BACKUP_FILE
+# Izveidojiet rezerves kopiju
+mysqldump -u klientu_registrs -p$MYSQL_PASSWORD $DB_NAME > $BACKUP_DIR/backup_$DATE.sql
 
-# Kompresēšana
-gzip $BACKUP_FILE
-
-echo "Rezerves kopija izveidota: ${BACKUP_FILE}.gz"
+# Dzēsiet vecās kopijas (vecākas par 30 dienām)
+find $BACKUP_DIR -name "backup_*.sql" -mtime +30 -delete
 ```
 
-### 8.3. Atjaunošanas procedūras
+**Plānojiet automātiskos backupus:**
+```bash
+# Pievienojiet crontab
+crontab -e
 
-#### 8.3.1. Pilnas atjaunošanas
+# Pievienojiet rindu (katru dienu plkst. 2:00)
+0 2 * * * /path/to/backup_mysql.sh
+```
 
-1. **Pārtrauciet sistēmu:**
-   - Paziņojiet visus lietotājus
-   - Apturiet programmu
-   - Pārbaudiet, ka nav aktīvu darbību
+### 8.3. Datubāzes optimizācija
 
-2. **Izveidojiet rezerves kopiju:**
-   - Izveidojiet pašreizējošu rezerves kopiju
-   - Pārbaudiet rezerves kopijas integritāti
+**Reizi mēnesī:**
+```sql
+-- Optimizēt tabulas
+OPTIMIZE TABLE klienti;
+OPTIMIZE TABLE client_card_info;
+OPTIMIZE TABLE health_cards;
+OPTIMIZE TABLE plans;
+OPTIMIZE TABLE nodarbibas;
+OPTIMIZE TABLE protokoli;
+OPTIMIZE TABLE sarunas_apraksti;
 
-3. **Atjaunojiet datubāzi:**
-   ```bash
-   mysql --host=localhost --user=root --password=root_password < backup_file.sql
-   ```
-
-4. **Pārbaudiet atjaunošanos:**
-   - Pārbaudiet, vai sistēma strādājās
-   - Pārbaudiet, vai visi dati ir atjaunoti
-   - Atļaujiet lietotāju piekļuvi
+-- Pārbaudīt tabulu statusu
+SHOW TABLE STATUS FROM klientu_registrs;
+```
 
 ---
 
-## 9. PROBLĒMU NOVĒRŠANA
+## 9. KĻŪDU NOVĒRŠANA
 
 ### 9.1. Biežākās problēmas
 
-#### 9.1.1. Nevar pieslēgties datubāzei
+**Problēma: Nevar pieslēgties datubāzei**
+- **Risinājums:**
+  1. Pārbaudiet, ka MySQL serveris darbojas
+  2. Pārbaudiet tīkla savienojumu
+  3. Pārbaudiet lietotājvārdu un paroli
+  4. Pārbaudiet firewall iestatījumus
 
-**Simptomi:**
-- Programma parāda "Nevar izveidot savienojumu ar datubāzi"
-- Kļūdas žurnālā: "Communications link failure"
+**Problēma: Aplikācija nestartējas**
+- **Risinājums:**
+  1. Pārbaudiet Java versiju (jābūt 21)
+  2. Pārbaudiet licences statusu
+  3. Pārbaudiet žurnālfailus
+  4. Pārbaudiet, ka nav citu instanču
 
-**Izmeklēšanas soļi:**
-1. **Pārbaudiet MySQL darbību:**
-   ```bash
-   sc query mysql80
-   ```
+**Problēma: Lēns darbība**
+- **Risinājums:**
+  1. Pārbaudiet RAM izmantošanu
+  2. Optimizējiet datubāzi
+  3. Palieliniet JVM atmiņu
+  4. Pārbaudiet tīkla veiktspēju
 
-2. **Pārbaudiet tīkla savienojumu:**
-   ```bash
-   telnet localhost 3306
-   ```
+### 9.2. Žurnālfaili
 
-3. **Pārbaudiet konfigurācijas failu:**
-   ```bash
-   type "C:\ProgramData\KlientuRegistrs\db_config.properties"
-   ```
-
-4. **Pārbaudiet lietotāja tiesības:**
-   ```sql
-   SHOW GRANTS FOR 'socialcare'@'localhost';
-   ```
-
-#### 9.1.2. Java versijas konflikts
-
-**Simptomi:**
-- Kļūda: "Unsupported major.minor version 52.0"
-- Programma nedarbojas
-
-**Risinājums:**
-1. **Pārbaudiet Java versiju:**
-   ```bash
-   java -version
-   ```
-
-2. **Atjauniniet Java uz 21. versiju:**
-   - Noņmējiet esošo Java versiju
-   - Uzstādiet Java 21
-   - Atjauniniet JAVA_HOME vides mainīgo
-
-#### 9.1.3. Lēna programma palaišanās
-
-**Simptomi:**
-- Programma ilgi lēno startēšanos
-- Atmiņas izlietojums ir 100%
-
-**Izmeklēšanas soļi:**
-1. **Pārbaudiet sistēmas resursus:**
-   - CPU izmantošana
-   - Atmiņas pieejaukums
-   - Diska lasīšanas rakstura
-
-2. **Optimizējiet JVM parametrus:**
-   ```bash
-   java -Xms512m -Xmx2048m -XX:+UseG1GC
-   ```
-
-3. **Pārbaudiet, vai nav pārākām lietotāju:**
-   - Pārbaudiet, vai sistēma ir noslogota
-   - Samaziniet lietotāju skaitu
-
-### 9.2. Kļūdu žurnāli
-
-#### 9.2.1. Kļūdu žurnālu atrašanās vietas
-
+**Aplikācijas žurnāli:**
 ```
-# Programmas žurnāli
-C:\ProgramData\KlientuRegistrs\logs\
-├── app.log              # Galvenais aplikācijas žurnāls
-├── database.log         # Datubāzes operācijas
-├── security.log         # Drošības notikumi
-└── error.log           # Tikai kļūdu ziņojumi
-
-# Sistēmas žurnāli
-C:\ProgramData\MySQL\Data\
-├── mysql-error.log      # MySQL kļūdu žurnāls
-└── mysql-slow.log       # Lēni vaicājumi
+.klientu_registrs/logs/
+├── application.log          # Galvenais žurnālis
+├── error.log               # Kļūdu žurnālis
+├── audit.log               # Darbību žurnālis
+└── database_operations.log # Datubāzes operācijas
 ```
 
-#### 9.2.2. Kļūdu analīze
-
-```bash
-# Pēdējās 100 kļūdu rinduņu
-tail -n 100 "C:\ProgramData\KlientuRegistrs\logs\app.log"
-
-# Meklēt kļūdu pēc tekstau
-grep -i "error" "C:\ProgramData\KlientuRegistrs\logs\*.log"
-
-# Meklēt specifisku kļūdu
-grep -i "database" "C:\ProgramData\KlientuRegistrs\logs\app.log"
+**MySQL žurnāli:**
+```
+/var/log/mysql/ (Linux)
+C:\ProgramData\MySQL\MySQL Server 8.0\Data\ (Windows)
+├── error.log               # MySQL kļūdas
+├── slow.log                # Lēni vaicājumi
+└── mysql-bin.log           # Binārie žurnāli
 ```
 
-### 9.3. Veiktspējas problēmas
-
-#### 9.3.1. Lēna datu ielāde
-
-**Simptomi:**
-- Klientu saraksts ielādās vairāk par 10 sekundēm
-- Statistikas apskates aizņem
-
-**Risinājums:**
-1. **Pārbaudiet indeksus:**
-   ```sql
-   SHOW INDEX FROM klienti;
-   ANALYZE TABLE klienti;
-   ```
-
-2. **Optimizējiet vaicājumus:**
-   - Izmantojiet `LIMIT` un `OFFSET`
-   - Izvairieties no `SELECT *`
-   - Izmantojiet `EXPLAIN` vaicājumu analīzei
-
-3. **Palielināt savienojumu pūlu:**
-   ```sql
-   SHOW VARIABLES LIKE 'max_connections%';
-   SET GLOBAL max_connections = 200;
-   ```
-
----
-
-## 10. UZTURĒŠANA UN ATJAUNINĀŠANA
-
-### 10.1. Regulārā uzturēšana
-
-#### 10.1.1. Mēnešnā uzturēšanas uzdevumi
-
-**Katru nedēļas:**
-1. **Datubāzes optimizācija:**
-   - Analizēt vaicājumu veiktspēju
-   - Optimizēt indeksus
-   - Tīrīt vecus datus
-
-2. **Žurnālu tīrīšana:**
-   - Dzēst vecus žurnālu failus
-   - Arhivējiet lielus žurnālus
-   - Pārbaudiet žurnālu rotācijas iestatījumus
-
-3. **Sistēmas atjaunināšana:**
-   - Pārbaudīt jaunāku Java versiju
-   - Atjaunināt bibliotēkas
-   - Pārbaudīt drošības iestatījumus
-
-#### 10.1.2. Uzturēšanas skripts
-
-```bash
-#!/bin/bash
-# Mēnešnā uzturēšanas skripts
-
-# 1. Datubāzes optimizācija
-mysql -u root -p socialcare_db -e "OPTIMIZE TABLE klienti;"
-mysql -u root -p socialcare_db -e "OPTIMIZE TABLE plāni;"
-mysql -u root -p socialcare_db -e "OPTIMIZE TABLE nodarbibas;"
-
-# 2. Analīze tabulu
-mysql -u root -p socialcare_db -e "ANALYZE TABLE klienti;"
-mysql -u root -p socialcare_db -e "ANALYZE TABLE plāni;"
-
-# 3. Pārbaudīt indeksus
-mysql -u root -p socialcare_db -e "SHOW INDEX FROM klienti;"
-mysql -u root -p socialcare_db -e "SHOW INDEX FROM plāni;"
-
-# 4. Tīrīt vecus žurnālus
-find "C:\ProgramData\KlientuRegistrs\logs" -name "*.log" -mtime +30 -delete
-find "C:\ProgramData\KlientuRegistrs\logs" -name "*.log" -mtime +90 -delete
-```
-
-### 10.2. Sistēmas atjaunināšana
-
-#### 10.2.1. Atjaunināšanas grafiks
-
-```
-Sistēmas atjaunināšana (2.1.0 → 2.2.0):
-┌─────────────────────────────────────────────┐
-│ 1. Plānošana                    │
-│    - Jaunas prasības analīze          │
-│    - Atjaunināšanas grafiks           │
-│    - Testēšanas fāzē                   │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│ 2. Izstrādātā                     │
-│    - Jaunas funkcionalitātes izstrāde   │
-│    - Koda pārskatīšana                │
-│    - Testēšana un validācija           │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│ 3. Testēšana                       │
-│    - Unit testēšana                    │
-│    - Integrācijas testēšana              │
-│    - Uzstādīšanas testēšana             │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│ 4. Izplatīšana                      │
-│    - Pilnā izplatīšana                │
-│    - Lietotāju apmācība              │
-│    | 1. mēnešis                     │
-└─────────────────────────────────────────────┘
-┌─────────────────────────────────────────────┐
-│ 5. Atjaunināšana                   │
-│    - Progresīva migrācija              │
-│    | 1. nedēļa: 25%                     │
-│    | 2. nedēļa: 50%                     │
-│    | 3. nedēļa: 75%                     │
-│    | 4. nedēļa: 100%                    │
-└─────────────────────────────────────────────┘
-```
-
-### 10.3. Atjaunināšanas procedūra
-
-#### 10.3.1. Sagatavošanas fāzi
-
-1. **Datu dublēšana:**
-   - Izveidojiet pilnu rezerves kopiju
-   - Saglabājiet esošo konfigurāciju
-   - Dokumentējiet esošo sistēmas stāvokli
-
-2. **Testēšanas vides:**
-   - Testējiet jauno versiju izolētā vidē
-   - Pārbaudiet visu funkcionalitāti
-   - Testējiet datu migrāciju
-
-3. **Izplatīšana:**
-   - Izveidojiet izplatīšanas pakotni
-   - Izplatiet jauno versiju
-   - Pārlieciet lietotājus
-
-4. **Pēc izplatīšanas:**
-   - Monitorējiet sistēmas darbību
-   - Apstrādājiet lietotājus par izmaiņām
-   | - Vākti atbalsta
-
----
-
-## PIELIKUMI
-
-### Pielikums A: Sistēmas prasību matrica
-
-| Komponents | Minimālās | Ieteicamā | Testēta |
-|-----------|-----------|------------|---------|
-| CPU | 2 cores | 4 cores | Intel i5 |
-| RAM | 4 GB | 8 GB | 16 GB |
-| Diska vieta | 50 GB | 100 GB | 200 GB |
-| Tīkls | 100 Mbps | 1 Gbps | 1 Gbps |
-| Java | JRE 21 | JDK 21 | OpenJDK 21 |
-| MySQL | 8.0+ | 8.0+ | MySQL 8.0 |
-
-### Pielikums B: Konfigurācijas faili
-
-| Fails | Apraksts | atrašanās vieta |
-|-------|----------|----------------|
-| db_config.properties | Datubāzes konfigurācija | `C:\ProgramData\KlientuRegistrs\` |
-| app.properties | Programmas konfigurācija | `C:\ProgramData\KlientuRegistrs\` |
-| logback.xml | Žurnālierakstu konfigurācija | `C:\ProgramData\KlientuRegistrs\logs\` |
-
-### Pielikums C: Noderīgi komandi
-
-| Komanda | Apraksts |
-|---------|----------|
-| `java -version` | Pārbaudīt Java versiju |
-| `mysql --version` | Pārbaudīt MySQL versiju |
-| `sc query mysql80` | Pārbaudīt MySQL servisu |
-| `mysqldump` | Izveidot rezerves kopiju |
-| `mysqlcheck` | Pārbaudīt datubāves integritāti |
-
-### Pielikums D: Kontaktinformācija
+### 9.3. Atbalsta informācija
 
 **Tehniskais atbalsts:**
-- E-pasts: davisstrazds@gmail.com
-- Tālrunis: +371 26482667
-- Darba laiks: Darbdienās 9:00-18:00
+- **E-pasts:** support@klienturegistrs.lv
+- **Tālrunis:** +371 XXXXXXXX
+- **Darba laiks:** Darbdienās 9:00-17:00
 
-**Ārkārtējās situācijas:**
-- Tālrunis: +371 26482667 (24/7)
+**Kļūdu ziņošana:**
+1. Sagatavojiet žurnālfailus
+2. Aprakstiet problēmu
+3. Norādiet sistēmas informāciju:
+   - Operētājsistēma
+   - Java versija
+   - Aplikācijas versija
+   - Kļūdas ziņojums
 
 ---
 
-**Dokumenta beigas**
+## IZVIETOŠANAS SARAKSTS
 
-© 2024 Dāvis Strazds. Visas tiesības aizsargātas.
+### Pirms instalācijas:
+- [ ] Pārbaudīt sistēmas prasības
+- [ ] Instalēt Java 21 LTS
+- [ ] Instalēt MySQL Server 8.0+
+- [ ] Iegūt licences atslēgu
+- [ ] Sagatavot tīkla konfigurāciju
 
-Šī izvietošanas un uzturēšanas instrukcija ir paredzēta sistēmas administratoriem un IT speciālistiem. Tās izplatīšana bez atļaujas ir aizliegta.
+### Instalācijas laikā:
+- [ ] Izveidot datubāzi
+- [ ] Izveidot lietotāju
+- [ ] Instalēt aplikāciju
+- [ ] Konfigurēt datubāzes savienojumu
+- [ ] Izveidot administratora kontu
+- [ ] Iestatīt iestādes informāciju
 
-*Pēdējoreiz atjaunināts: 2024. gada 15. janvārī*
+### Pēc instalācijas:
+- [ ] Testēt savienojumus
+- [ ] Testēt galvenās funkcijas
+- [ ] Izveidot rezerves kopiju stratēģiju
+- [] Iestatīt monitoringu
+- [] Apmācīt lietotājus
+
+---
+
+## DROŠĪBAS PASĀKUMI
+
+### Tīkla drošība:
+- Izmantojiet SSL/TLS datubāzes savienojumiem
+- Ierobežojiet piekļuvi tikai nepieciešamajiem IP
+- Izmainiet standarta MySQL portus
+- Izmantojiet drošas paroles
+
+### Datu drošība:
+- Regulāri veiciet rezerves kopijas
+- Šifrējiet sensitīvus datus
+- Ierobežojiet lietotāju tiesības
+- Monitorējiet piekļuves mēģinājumus
+
+### Sistēmas drošība:
+- Atjaunināt sistēmu regulāri
+- Izmantojiet antivīrusu programmatūru
+- Ierobežojiet fizisko piekļuvi
+- Veiciet regulārus drošības auditus
+
+---

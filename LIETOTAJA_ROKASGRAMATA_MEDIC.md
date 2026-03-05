@@ -1,8 +1,9 @@
-# Klientu Reģistrs - Medicīniskā personāla rokasgrāmata
+# Klientu Reģistrs - Medicīniskā Personāla Rokasgrāmata
 
 **Versija:** 2.1.0  
-**Loma:** Medicīniskais darbinieks  
+**Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
+**Loma:** MEDICAL_STAFF  
 
 ---
 
@@ -10,14 +11,14 @@
 
 1. [IEVADS](#1-ievads)
 2. [PIEKĻUVE UN AUTENTIFIKĀCIJA](#2-piekļuve-un-autentifikācija)
-3. [MEDICĪNISKĀS INFORMĀCIJAS PĀRVALDĪBA](#3-medicīniskās-informācijas-pārvaldība)
-4. [MEDIKAMENTU PĀRVALDĪBA](#4-medikamentu-pārvaldība)
-5. [VEIDLAPU SAGATAVOŠANA](#5-veidlapu-sagatavošana)
-6. [STATISTIKA UN ATSKAITES](#6-statistika-un-atskaites)
-7. [DOKUMENTĀCIJAS EKSPORTS](#7-dokumentācijas-ekports)
-8. [DROŠĪBAS PASĀKUMI](#8-drošības-pasākumi)
-9. [BIEDĪGI PADOMI](#9-biedīgi-padomi)
-10. [PROBLĒMU NOVĒRŠANA](#10-problēmu-novēršana)
+3. [GALVENĀ INTERFEISA PĀRSKATS](#3-galvenā-interfeisa-pārskats)
+4. [VESELĪBAS KARTES PĀRVALDĪBA](#4-veselības-kartes-pārvaldība)
+5. [MEDICĪNAS DATI SLIMNĪCAI](#5-medicīnas-dati-slimnīcai)
+6. [MEDIKAMENTU PASŪTĪJUMI](#6-medikamentu-pasūtījumi)
+7. [STATISTIKA UN ATSKAITES](#7-statistika-un-atskaites)
+8. [DROŠĪBA UN KONFIDENCIALITĀTE](#8-drošība-un-konfidencialitāte)
+9. [PROBLĒMU NOVĒRŠANA](#9-problēmu-novēršana)
+10. [PIELIKUMI](#10-pielikumi)
 
 ---
 
@@ -25,22 +26,22 @@
 
 ### 1.1. Medicīniskā personāla atbildība
 
-Kā medicīniskais darbinieks jums ir pieejamas šādas funkcijas:
-- Klientu veselības kartes pārvaldība
+Kā medicīniskais darbinieks (MEDICAL_STAFF) jums ir pieejamas šādas funkcijas:
+- Klientu veselības kartes pārvaldība (HealthFormController)
+- Medikamentu pasūtījumu centrs (MedRequestCenterController)
+- Veidlapu sagatavošana slimnīcām (HospitalFormController)
 - Diagnožu un medikamentu uzskaite
-- Medikamentu pasūtījumu veidošana
-- Veidlapu sagatavošana slimnīcām
 - Medicīnisko datu statistika
 
 ### 1.2. Sistētas medicīniskās funkcijas
 
 **Galvenās medicīniskās funkcijas:**
 - Veselības kartes izveide un uzturēšana
-- Diagnožu reģistrēšana (MK-10 klasifikācija)
-- Medikamentu sarakstu pārvaldība
-- Medikamentu pasūtījumu centrs
-- Veidlapu ģenerēšana stacionēšanai
-- Medicīnisko datu eksports
+- Diagnožu reģistrēšana (health_cards tabula)
+- Medikamentu sarakstu pārvaldība (client_medications tabula)
+- Medikamentu pasūtījumu centrs (med_requests, med_request_items tabulas)
+- Veidlapu ģenerēšana stacionēšanai (Excel eksports)
+- Medicīnisko datu eksports un statistika
 
 ---
 
@@ -64,135 +65,159 @@ Kā medicīniskais darbinieks jums ir pieejamas šādas funkcijas:
 
 ### 2.2. Medicīniskās personas tiesības
 
-Jūsu loma (MEDIC) ļauj piekļūt:
-- ✅ Klientu veselības datiem
+Jūsu loma (MEDICAL_STAFF) ļauj piekļūt:
+- ✅ Klientu veselības datiem (canEditHealth = true)
 - ✅ Medikamentu pārvaldībai
 - ✅ Veidlapu sagatavošanai
 - ✅ Medicīniskai statistikai
-- ❌ Klientu reģistrācijai
+- ❌ Klientu reģistrācijai (canEditClientRegister = false)
 - ❌ Plānu izveidei
-- ❌ Administratīvajām funkcijām
+- ❌ Administratīvajām funkcijām (isAdmin = false)
 
 ---
 
-## 3. MEDICĪNISKĀS INFORMĀCIJAS PĀRVALDĪBA
+## 4. VESELĪBAS KARTES PĀRVALDĪBA
 
-### 3.1. Veselības kartes atvēršana
+### 4.1. HealthFormController - Veselības kartes skats
 
-1. **Atrodiet klientu:**
-   - Galvenais panelis → Klientu saraksts
-   - Meklējiet pēc vārda, uzvārda vai personas koda
-   - Dubultklikšķis uz klienta
+1. **Atveriet veselības kartes skatu:**
+   - Galvenais panelis → Veselības karte
+   - Izvēlieties klientu no saraksta
 
-2. **Atveriet veselības karti:**
-   - Klienta kartes cilnēs izvēlieties **"Veselības karte"**
-   - Jūs redzēsiet klienta medicīniskās informācijas veidlapu
+2. **Veselības kartes informācija:**
+   - Klienta pamatinformācija (vārds, personas kods, vecums)
+   - Ģimenes ārsts un psihiatrs
+   - Invaliditātes grupa
+   - Esošās diagnozes
+   - Pašreizējie medikamenti
+
+### 4.2. Datu apskate un rediģēšana
+
+**Tiesības (canEditHealth):**
+- ✅ MEDICAL_STAFF - pilnas tiesības
+- ✅ ADMIN - pilnas tiesības
+- ❌ Pārējās lomas - tikai apskate
 
 ### 3.2. Veselības kartes aizpildīšana
 
 #### 3.2.1. Pamatinformācija
 
+**Faktiskā UI (HealthFormView.fxml):**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    VESĪBAS KARTE                         │
+│              VESĪBAS KARTES INFORMĀCIJA                   │
 ├─────────────────────────────────────────────────────────────┤
-│ Klients: Jānis Bērziņš (PK: 161175-19997)             │
-│ Dzimšanas datums: 16.11.1975                           │
+│ [Aizvērt]                                              │
 ├─────────────────────────────────────────────────────────────┤
-│ ANAMNĒZE                                                 │
+│ Izvēlies klientu:                                       │
+│ [klientsComboBox] (meklējams)                           │
+│                                                         │
 │ ┌─────────────────────────────────────────────────────────┐ │
-│ │ Hroniskās slimības:                                  │ │
-│ │ [_________________________________________]        │ │
-│ │                                                         │ │
-│ │ Alerģijas:                                            │ │
-│ │ [_________________________________________]        │ │
-│ │                                                         │ │
-│ │ Iepriekšējās hospitalizācijas:                         │ │
-│ │ [_________________________________________]        │ │
-│ │                                                         │ │
-│ │ Ģimenes anamnēze:                                      │ │
-│ │ [_________________________________________]        │ │
-│ └─────────────────────────────────────────────────────────┘ │
-├─────────────────────────────────────────────────────────────┤
-│ PAŠREIZĒJĀ STĀVOKLIS                                     │
-│ ┌─────────────────────────────────────────────────────────┐ │
-│ │ Galvenie sūdzībi:                                     │ │
-│ │ [_________________________________________]        │ │
-│ │                                                         │ │
-│ │ Fiziskā pārbaude:                                      │ │
-│ │ [_________________________________________]        │ │
-│ │                                                         │ │
-│ │ Vitalie rādītāji:                                     │ │
-│ │ Asinsspiediens: [___]/[___] mmHg                       │ │
-│ │ Pulss: [____] sit/min                                  │ │
-│ │ Temperatūra: [____] °C                                │ │
-│ │ Svars: [____] kg                                       │ │
-│ │ Augums: [____] cm                                      │ │
+│ │ Vārds Uzvārds:     [clientNameLabel]                   │ │
+│ │ Vecums:             [ageLabel]                           │ │
+│ │ Ģimenes ārsts:      [familyDoctorLabel]                   │ │
+│ │ Psihiatrs:          [psychiatristLabel]                   │ │
+│ │ Invaliditātes grupa: [disabilityGroupLabel]               │ │
+│ │ Diagnoze:           [diagnosisLabel] (wrapText)          │ │
+│ │ Terapija:            [therapyLabel] (wrapText)            │ │
 │ └─────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────┘
 ```
 
+**FXML struktūra:**
+- **`klientsComboBox`** - klientu izvēle (editable)
+- **`detailsCard`** - informācijas karte (VBox)
+- **`GridPane` - lauku izkārtojums (2 kolonnas)
+- **`clientNameLabel`** - klienta vārds (no klienti.klienta_vards_uzvards)
+- **`ageLabel`** - vecums (aprēķināts no klienti.birth_date)
+- **`familyDoctorLabel`** - ģimenes ārsts (no arsti.name, klienti.gimenes_arsts_id)
+- **`psychiatristLabel`** - psihiatrs (no psihiatri.name, klienti.psihiatrs_id)
+- **`disabilityGroupLabel`** - invaliditātes grupa (no invaliditates_grupas.name, klienti.invaliditates_grupa_id)
+- **`diagnosisLabel`** - diagnozes (no client_diagnoses + diagnozes.name)
+- **`therapyLabel`** - terapija (no client_medications + medikamenti.name)
+
+**CSS stili:**
+- `@health.css` - veselības kartes stili
+- `header` - galvene virsraksts
+- `close-btn` - aizvēršanas poga
+- `section-title` - sadaļas virsraksts
+- `card` - informācijas karte
+- `field-label` - lauku nosaukumi
+- `field-value` - lauku vērtības
+
 #### 3.2.2. Diagnožu pievienošana
 
 1. **Pievienojiet diagnozi:**
-   - Spiediet pogu "Pievienot diagnozi"
-   - Izvēlieties diagnozi no MK-10 saraksta
-   - Norādiet diagnozes veidu (galvenā/papildus)
-   - Ievadiet diagnozes aprakstu un datumu
+   - Spiediet pogu "Pievienot diagnozi" (handleAddDiagnoze)
+   - Izvēlieties diagnozi no "diagnozes" tabulas
+   - Diagnoze tiek pievienota `diagnozuSaraksts` sarakstam
 
 2. **Diagnožu saraksts:**
    ```
    ┌─────────────────────────────────────────────────────────────┐
-   │ DIAGNŌZU SARAKSTS                                        │
+   │ DIAGNŌZU SARAKSTS (HealthFormController)                │
    ├─────────────────────────────────────────────────────────────┤
-   │ I10.1 - Esenciālā hipertensija (Galvenā) 15.01.2024     │
-   │ E11.2 - Cukura diabēts ar nieru komplikācijām      │
-   │         (Papildus) 20.03.2023                           │
-   │ I25.1 - Aterosklerotiska sirds slimība (Galvenā)        │
-   │         10.11.2022                                      │
+   │ [No "diagnozes" tabulas] (ID: [id])                    │
+   │ [No "diagnozes" tabulas] (ID: [id])                    │
+   │ [No "diagnozes" tabulas] (ID: [id])                    │
    │                                                         │
    │ [Pievienot] [Rediģēt] [Dzēst]                         │
    └─────────────────────────────────────────────────────────────┘
    ```
 
+**Datu avoti (MySQL tabulas):**
+- `diagnozeComboBox.getValue()` - izvēlētā diagnoze
+- `diagnozuSaraksts` - saraksts ar `IdNamePair` objektiem
+- `client_diagnoses` tabula - klienta diagnozes (client_id, diagnosis_id)
+- `diagnozes` tabula - diagnožu nosaukumi (id, name, is_deleted, last_updated)
+- `SharedDataService.getDiagnozesMap()` - nosaukumi no `diagnozes` tabulas
+
 ### 3.3. Medikamentu saraksts
 
 #### 3.3.1. Pašreizējie medikamenti
 
+**Faktiskā darbība (HealthFormController):**
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ PAŠREIZĒJIE MEDIKAMENTI                                   │
 ├─────────────────────────────────────────────────────────────┤
 │ ┌─────────────────────────────────────────────────────────┐ │
-│ │ Zāles: Metoprolols                                     │ │
-│ │ Deva: 50mg                                             │ │
-│ │ Biežums: 2x dienā                                     │ │
-│ │ Ceļš: Perorāli                                         │ │
-│ │ Sākuma datums: 15.01.2024                              │ │
-│ │ Beigu datums: [________________]                        │ │
+│ │ Zāles: [No "medikamenti" tabulas]                     │ │
+│ │ Forma: [No "medikamentu_formas" tabulas]               │ │
+│ │ Laiki: [No "medikamentu_lietosanas_laiki" tabulas]     │ │
 │ │                                                         │ │
-│ │ Zāles: Metformīns                                       │ │
-│ │ Deva: 1000mg                                           │ │
-│ │ Biežums: 2x dienā                                     │ │
-│ │ Ceļš: Perorāli                                         │ │
-│ │ Sākuma datums: 20.03.2023                              │ │
-│ │ Beigu datums: [________________]                        │ │
+│ │ Zāles: [No "medikamenti" tabulas]                     │ │
+│ │ Forma: [No "medikamentu_formas" tabulas]               │ │
+│ │ Laiki: [No "medikamentu_lietosanas_laiki" tabulas]     │ │
 │ └─────────────────────────────────────────────────────────┘ │
 │                                                         │
 │ [Pievienot medikamentu] [Eksportēt sarakstu]            │
 └─────────────────────────────────────────────────────────────┘
 ```
 
+**Datu avoti (MySQL tabulas):**
+- `medikamentsComboBox` - medikamentu izvēle
+- `lietosanasLaikiComboBox` - lietošanas laiki
+- `medikamentuSaraksts` - saraksts ar medikamentiem
+- `client_medications` tabula - klienta medikamenti (client_id, medication_id)
+- `client_medication_times` tabula - medikamentu lietošanas laiki (client_id, medication_id, times)
+- `medikamenti` tabula - medikamentu nosaukumi (id, name, is_deleted, last_updated)
+- `medikamentu_formas` tabula - medikamentu formas (id, name, is_deleted, last_updated)
+- `medikamentu_lietosanas_laiki` tabula - lietošanas laiki (id, name, is_deleted, last_updated)
+- `SharedDataService.getMedikamentiMap()` - nosaukumi no `medikamenti` tabulas
+
 #### 3.3.2. Medikamenta pievienošana
 
 1. **Spiediet "Pievienot medikamentu"**
 2. **Aizpildiet veidlapu:**
-   - Zāļu nosaukums (izvēle no saraksta)
-   - Deva un forma
-   - Biežums un ceļš
-   - Sākuma un beigu datumi
-   - Norīkojuma apraksts
-   - Ārsta vārds
+   - Klients (izvēle no saraksta)
+   - Medikaments (izvēle no "medikamenti" tabulas)
+   - Medikamenta forma (izvēle no "medikamentu_formas" tabulas)
+   - Lietošanas laiki (izvēle no "medikamentu_lietosanas_laiki" tabulas)
+   - Pasūtījuma datums
+   - Ārsta vārds (izvēle no "arsti" vai "psihiatri" tabulām)
+
+**Piezīme:** Visi saraksti tiek ielādēti no datu bāzes un ir dinamiski pārvaldāmi.
 
 ---
 
@@ -212,21 +237,21 @@ Jūsu loma (MEDIC) ļauj piekļūt:
    ├─────────────────────────────────────────────────────────────┤
    │ PASŪTĪJUMS #001 (Aktīvs)                               │
    │ Izveidots: 15.01.2024                                   │
-   │ Termiņš: 25.01.2024                                    │
    │ Statuss: Gaida apstiprinājumu                           │
    │                                                         │
    │ ┌─────────────────────────────────────────────────────────┐ │
-   │ │ Rinda │ Zāles                │ Deva   │ Daudzums  │ │
+   │ │ Rinda │ Zāles (no datu bāzes) │ Forma   │ Klients   │ │
    │ ├─────────────────────────────────────────────────────────┤ │
-   │ │ 1    │ Metoprolols          │ 50mg   │ 100 tbl.  │ │
-   │ │ 2    │ Metformīns           │ 1000mg │ 200 tbl.  │ │
-   │ │ 3    │ Amlodipīns           │ 10mg   │ 50 tbl.   │ │
-   │ │ 4    │ Atorvastatīns        │ 20mg   │ 100 tbl.  │ │
+   │ │ 1    │ [Medikamenta nosaukums] │ [Forma] │ [Klients] │ │
+   │ │ 2    │ [Medikamenta nosaukums] │ [Forma] │ [Klients] │ │
+   │ │ 3    │ [Medikamenta nosaukums] │ [Forma] │ [Klients] │ │
    │ │                                                         │ │
    │ │ [Pievienot zāles] [Eksportēt] [Nosūtīt]               │ │
    │ └─────────────────────────────────────────────────────────┘ │
    └─────────────────────────────────────────────────────────────┘
    ```
+
+   **Piezīme:** Medikamentu nosaukumi tiek ielādēti no "medikamenti" tabulas datu bāzē.
 
 ### 4.2. Jauna pasūtījuma izveide
 
@@ -284,56 +309,54 @@ Jūsu loma (MEDIC) ļauj piekļūt:
 3. **Veidlapas satura apskate:**
    ```
    ┌─────────────────────────────────────────────────────────────┐
-   │ VEIDLAPA STACIONĒŠANAI                                  │
+   │ VEIDLAPA STACIONĒŠANAI (HospitalFormController)          │
    ├─────────────────────────────────────────────────────────────┤
-   │ IESTĀDES INFORMĀCIJA                                    │
-   │ Nosaukums: [Sociālās aprūpes centrs "Ziedonis"]       │
-   │ Adrese:    [Rīgas iela 1, Rīga, LV-1001]              │
-   │ Tālrunis:  [29123456]                                  │
-   │ E-pasts:   [info@ziedonis.lv]                           │
-   ├─────────────────────────────────────────────────────────────┤
-   │ KLIENTA INFORMĀCIJA                                      │
-   │ Vārds, uzvārds: Jānis Bērziņš                         │
-   │ Personas kods: 161175-19997                              │
-   │ Dzimšanas datums: 16.11.1975                            │
-   │ Adrese:        Brīvības iela 123, Rīga                 │
+   │ KLIENTA INFORMĀCIJA                                     │
+   │ Klients: [Izvēlēts no klientu saraksta]                │
+   │ Personas kods: [Automātiski no klienta datiem]          │
+   │ Vecums: [Automātiski aprēķināts]                        │
    ├─────────────────────────────────────────────────────────────┤
    │ MEDICĪNISKĀ INFORMĀCIJA                                 │
-   │ ┌─────────────────────────────────────────────────────────┐ │
-   │ │ Galvenās diagnozes:                                   │ │
-   │ │ • I10.1 - Esenciālā hipertensija                     │ │
-   │ │ • E11.2 - Cukura diabēts ar nieru komplikācijām     │ │
-   │ │                                                         │ │
-   │ │ Pašreizējie medikamenti:                               │ │
-   │ │ • Metoprolols 50mg 2x dienā                           │ │
-   │ │ • Metformīns 1000mg 2x dienā                         │ │
-   │ │ • Amlodipīns 10mg 1x dienā                           │ │
-   │ └─────────────────────────────────────────────────────────┘ │
-   ├─────────────────────────────────────────────────────────────┤
-   │ HOSPITALIZĀCIJAS INFORMĀCIJA                             │
-   │ Hospitalizācijas iemesls:                                │
-   │ [Veselības stāvokļa pasliktināšanās]                   │
+   │ Invaliditātes grupa: [No "invaliditates_grupas" tabulas] │
+   │ Invaliditātes numurs: [Ievadāms manuāli]              │
+   │ Ģimenes ārsts: [No "arsti" tabulas]                     │
+   │ Psihiatrs: [No "psihiatri" tabulas]                     │
    │                                                         │
-   │ Plānotās izmeklēšanas:                                  │
-   │ [Asins analīzes, EKG, Sirds ultraskaņa]                   │
+   │ Diagnozes:                                              │
+   │ [No "diagnozes" tabulas, pievienojamas ar + pogu]      │
    │                                                         │
-   │ Hospitalizācijas nodaļa:                                 │
-   │ [Terapijas nodaļa]                                      │
-   │                                                         │
-   │ Atbildīgais ārsts:                                       │
-   │ [Dr. Anna Ozola]                                        │
+   │ Medikamenti:                                             │
+   │ [No "medikamenti" tabulas + "medikamentu_formas"]       │
+   │ [Lietošanas laiki no "medikamentu_lietosanas_laiki"]    │
    └─────────────────────────────────────────────────────────────┘
    ```
 
+   **Piezīme:** Visi dati tiek iegūti no datu bāzes tabulām, nevis ir fiksēti.
+
 ### 5.2. Veidlapas eksportēšana
 
+**Faktiskā darbība:**
 1. **Pārbaudiet datus:**
-   - Pārskatiet visu veidlapas saturu
-   - Pārliecinieties, ka visas nepieciešamās informācija ir aizpildīta
+   - Klients (no klientu saraksta)
+   - Personas kods un vecums (automātiski)
+   - Invaliditātes grupa un numurs (no datubāzes)
+   - Ģimenes ārsts un psihiatrs (no datubāzes)
+   - Diagnozes (no "diagnozes" tabulas)
+   - Medikamenti (no "medikamenti" tabulas)
 
 2. **Eksportējiet veidlapu:**
-   - Spiediet pogu "Eksportēt"
-   - Izvēlieties formātu (PDF vai Word)
+   - Spiediet pogu "Eksportēt uz Excel"
+   - Tiks izmantots šablons "Medicina_slimnīcai.xlsx"
+   - Dati tiks ievietoti Excel šablona šūnās:
+     - C1: Iestāšanās datums
+     - B5: Klienta vārds, uzvārds
+     - C5: Personas kods
+     - D5: Vecums
+     - C7: Invaliditātes grupa un numurs
+     - A9: Ģimenes ārsts
+     - C9: Psihiatrs
+     - A13: Diagnozes
+     - A32-A37, C32-C37: Medikamenti (maks. 12)
    - Izvēlieties saglabāšanas vietu
 
 3. **Drukāšanas opcijas:**
@@ -358,87 +381,140 @@ Jūsu loma (MEDIC) ļauj piekļūt:
 
 ### 6.2. Diagnožu statistika
 
+**Faktiskā darbība (MedicalAnalysisCenterController):**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ DIAGNŌŽU STATISTIKA (2024)                               │
+│ DIAGNŌŽU STATISTIKA (MedicalAnalysisCenterController)      │
 ├─────────────────────────────────────────────────────────────┤
 │ ┌─────────────────────────────────────────────────────────┐ │
-│ │ MK-10 KODS | SLIMĪBA                     | SKAITS │ │
+│ │ DIAGNOZE                     | SKAITS │ │
 │ ├─────────────────────────────────────────────────────────┤ │
-│ │ I10        | Esenciālā hipertensija      │ 45     │ │
-│ │ E11        | Cukura diabēts              │ 23     │ │
-│ │ I25        | Išēmiska sirds slimība      │ 18     │ │
-│ │ F32        | Depresīvas epizodes          │ 12     │ │
-│ │ G20        | Parkinsona slimība           │ 8      │ │
+│ │ [No "diagnozes" tabulas]       │ [N]    │ │
+│ │ [No "diagnozes" tabulas]       │ [N]    │ │
+│ │ [No "diagnozes" tabulas]       │ [N]    │ │
+│ │ [No "diagnozes" tabulas]       │ [N]    │ │
+│ │ [No "diagnozes" tabulas]       │ [N]    │ │
 │ │                                                         │ │
-│ │ KOPĀ: 106 klienti ar diagnozēm                         │ │
+│ │ KOPĀ: [unikālo diagnožu skaits] klienti ar diagnozēm   │ │
 │ └─────────────────────────────────────────────────────────┘ │
 │                                                         │
 │ [Detalizēts atskaite] [Eksportēt] [Drukāt]              │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Datu avoti:**
+- `HealthCard.getDiagnosisIds()` - ID saraksts
+- `SharedDataService.getDiagnozesMap()` - nosaukumi
+- `getTopN(diagnosisDataLong, 5)` - TOP 5 diagnozes
 
 ### 6.3. Medikamentu statistika
 
+**Faktiskā darbība (MedicalAnalysisCenterController):**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ MEDIKAMENTU LIETOŠANAS STATISTIKA                         │
+│ MEDIKAMENTU STATISTIKA (MedicalAnalysisCenterController)     │
 ├─────────────────────────────────────────────────────────────┤
 │ ┌─────────────────────────────────────────────────────────┐ │
-│ │ ZĀLES              | KLIENTI | VIDĒJA DEVA (dienā)   │ │
+│ │ MEDIKAMENTS           | KLIENTI | LIETOŠANAS LAIKI   │ │
 │ ├─────────────────────────────────────────────────────────┤ │
-│ │ Metoprolols         │ 45      │ 75mg                  │ │
-│ │ Metformīns          │ 23      │ 1500mg                │ │
-│ │ Amlodipīns         │ 18      │ 10mg                  │ │
-│ │ Atorvastatīns      │ 15      │ 20mg                  │ │
-│ │ Sertralīns         │ 12      │ 50mg                  │ │
+│ │ [No "medikamenti" tabulas] │ [N]    │ [No datubāzes]    │ │
+│ │ [No "medikamenti" tabulas] │ [N]    │ [No datubāzes]    │ │
+│ │ [No "medikamenti" tabulas] │ [N]    │ [No datubāzes]    │ │
+│ │ [No "medikamenti" tabulas] │ [N]    │ [No datubāzes]    │ │
+│ │ [No "medikamenti" tabulas] │ [N]    │ [No datubāzes]    │ │
 │ │                                                         │ │
-│ │ Kopā: 113 medikamentu receptes                         │ │
+│ │ Kopā: [unikālo medikamentu skaits] klienti               │ │
 │ └─────────────────────────────────────────────────────────┘ │
 │                                                         │
 │ [Detalizēts atskaite] [Eksportēt] [Drukāt]              │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Datu avoti:**
+- `HealthCardRepository.getMedicationFrequencyFromTherapy()`
+- `HealthCard.getMedicationIds()` - ID saraksts
+- `HealthCard.getMedicationTimes()` - lietošanas laiki
 
 ---
 
 ## 7. DOKUMENTĀCIJAS EKSPORTS
 
-### 7.1. Veselības kartes eksports
+### 7.1. Veidlapu slimnīcai eksports (HospitalFormView.fxml)
 
-1. **Atveriet klienta veselības karti**
-2. **Spiediet "Eksportēt":**
-   - Izvēlieties formātu (PDF, Word, Excel)
-   - Izvēlieties, kādu informāciju iekļaut:
-     - ✅ Pamatinformācija
-     - ✅ Anamnēze
-     - ✅ Diagnozes
-     - ✅ Medikamenti
-     - ✅ Vitalie rādītāji
-     - ✅ Laboratorijas analīzes
+**Faktiskā UI:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Veselības karte / Veidlapa slimnīcai                     │
+├─────────────────────────────────────────────────────────────┤
+│ [Klients] [Personas kods] [Invaliditātes grupa]            │
+│ [Ģimenes ārsts] [Psihiatrs] [Diagnozes]                   │
+│ [Medikamenti]                                              │
+├─────────────────────────────────────────────────────────────┤
+│ [Saglabāt DB] [Eksportēt uz Excel] [Notīrīt]              │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### 7.2. Medikamentu saraksta eksports
+**FXML elementi:**
+- **`handleExport`** - eksporta pogas metode
+- **`text="Eksportēt uz Excel"`** - tikai Excel eksports
+- **`FontAwesomeIconView glyphName="FILE_EXCEL_ALT"`** - Excel ikona
 
-1. **Medikamentu centrs → Eksports**
-2. **Eksporta opcijas:**
-   - Aktīvie medikamenti
-   - Visi medikamenti (ieskaitot pārtrauktos)
-   - Pašreizējā mēneša pasūtījumi
-   - Pasūtījumu vēsture
+**Faktiskā darbība (HospitalFormController):**
+1. **Atveriet veidlapu slimnīcai**
+2. **Aizpildiet datus:**
+   - Klients (ComboBox)
+   - Diagnozes (ListView)
+   - Medikamenti (ListView)
+3. **Spiediet "Eksportēt uz Excel"**
+   - Tikai **Excel** formāts
+   - Šablons: "Medicina_slimnīcai.xlsx"
+   - Automātiska datu aizpildīšana
 
-### 7.3. Statistikas eksports
+### 7.2. Medicīniskās statistikas eksports (MedicalAnalysisCenterView.fxml)
 
-1. **Statistika → Eksports**
-2. **Izvēlieties periodu:**
-   - Pēdējā mēnesis
-   - Pēdējie 3 mēneši
-   - Pēdējais gads
-   - Pielāgots periods
+**Faktiskā UI:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Medicīnas datu analīzes centrs                           │
+├─────────────────────────────────────────────────────────────┤
+│ [Periods] [Atlasīt datus] [Aprūpes līmenis] [Atjaunot]    │
+│ [Saglabāt kā attēlu] [Eksportēt tabulas] [Aizvērt]        │
+├─────────────────────────────────────────────────────────────┤
+│ Diagnožu diagramma + tabula | Medikamentu diagramma + tabula │
+└─────────────────────────────────────────────────────────────┘
+```
 
-3. **Eksporta formāti:**
-   - Excel (datu analīzei)
-   - PDF (atskaitēm)
-   - CSV (importēšanai citās sistēmās)
+**FXML elementi:**
+- **`handleExportTables`** - tabulu eksporta metode
+- **`text="Eksportēt tabulas"`** - tabulu eksports
+- **`handleSaveAsImage`** - attēlu saglabāšana
+- **`diagnosisTable`** - diagnožu tabula (TableView)
+- **`medicationTable`** - medikamentu tabula (TableView)
+
+**Faktiskā darbība (MedicalAnalysisCenterController):**
+1. **Atveriet medicīnisko statistiku**
+2. **Izvēlieties filtrus:**
+   - Periods (ComboBox)
+   - Atlasīt datus par (ComboBox)
+   - Aprūpes līmenis (ComboBox)
+3. **Spiediet "Eksportēt tabulas"**
+   - **Tikai Excel** formāts
+   - Diagnožu tabula + Medikamentu tabula
+   - Automātiska datu eksportēšana
+
+### 7.3. Pieejamie eksporta formāti
+
+**Tikai Excel formāts:**
+- ✅ **Excel (.xlsx)** - visi eksporti
+- ❌ **PDF** - nav implementēts
+- ❌ **CSV** - nav implementēts
+- ❌ **Word** - nav implementēts
+
+**Eksporta tipi:**
+- **Veidlapas slimnīcai** → Excel šablons ("Medicina_slimnīcai.xlsx")
+- **Medicīniskā statistika** → Excel tabulas
+- **Attēlu saglabāšana** → PNG/JPEG (tikai diagrammas)
+
 
 ---
 
@@ -517,6 +593,12 @@ Jūsu loma (MEDIC) ļauj piekļūt:
 - Koordinējiet medikamentu izmaiņas ar atbildīgo ārstu
 - Veiciet regulārus veselības kartes pārskatus
 
+**Faktiskā darbība:**
+- Visi dati tiek iegūti no datu bāzes tabulām
+- Diagnozes no "diagnozes" tabulas
+- Medikamenti no "medikamenti" tabulas
+- Ārsti no "arsti" un "psihiatri" tabulām
+
 ---
 
 ## 10. PROBLĒMU NOVĒRŠANA
@@ -592,43 +674,51 @@ Ja sastopat tehnisku problēmu:
 
 ## PIELIKUMI
 
-### Pielikums A: MK-10 biežāk sastopamie kodi
+### Pielikums A: Datu avoti medicīniskajai statistikai
 
-| Kods | Nosaukums | Apraksts |
-|------|------------|----------|
-| I10 | Esenciālā hipertensija | Augsts asinsspiediens |
-| E11 | Cukura diabēts | Cukura slimība |
-| I25 | Išēmiska sirds slimība | Koronārā sirds slimība |
-| F32 | Depresīvā epizode | Depresija |
-| G20 | Parkinsona slimība | Parkinsons |
-| I50 | Sirds mazspēja | Sirds nepietiekama darbība |
-| J44 | Hroniska obstruktīva plaušu slimība | HOPP |
-| N18 | Hroniska nieru slimība | Nieru mazspēja |
+**Datu avoti (MySQL tabulas):**
+- `health_cards` tabula - veselības kartes (id, client_id, anamnesis, last_updated, is_deleted)
+- `client_diagnoses` tabula - klienta diagnozes (id, client_id, diagnosis_id)
+- `diagnozes` tabula - diagnožu nosaukumi (id, name, is_deleted, last_updated)
+- `MedicalAnalysisCenterController` - statistikas kontrolieris
 
-### Pielikums B: Medikamentu devu tabulas
+**Medikamentu dati:**
+- `health_cards` tabula - veselības kartes
+- `client_medications` tabula - klienta medikamenti (id, client_id, medication_id)
+- `client_medication_times` tabula - medikamentu lietošanas laiki (id, client_id, medication_id, times)
+- `medikamenti` tabula - medikamentu nosaukumi (id, name, is_deleted, last_updated)
+- `HealthCardRepository.getMedicationFrequencyFromTherapy()` - medikamentu biežums
 
-| Medikaments | Parastā deva | Maksimālā deva | Biežums |
-|-------------|---------------|------------------|----------|
-| Metoprolols | 25-100mg | 400mg | 1-2x dienā |
-| Metformīns | 500-1000mg | 3000mg | 2-3x dienā |
-| Amlodipīns | 5-10mg | 10mg | 1x dienā |
-| Atorvastatīns | 10-80mg | 80mg | 1x dienā |
-| Sertralīns | 50-200mg | 200mg | 1x dienā |
+### Pielikums B: Medicīniskās datu bāzes tabulas
 
-### Pielikums C: Noderīgi kontakti
+**Galvenās tabulas (MySQL):**
+- `health_cards` - veselības kartes (id, client_id, anamnesis, last_updated, is_deleted)
+- `client_diagnoses` - klienta diagnozes (id, client_id, diagnosis_id)
+- `client_medications` - klienta medikamenti (id, client_id, medication_id)
+- `client_medication_times` - medikamentu lietošanas laiki (id, client_id, medication_id, times)
+- `med_requests` - medikamentu pasūtījumi (id, name, creation_date, status, last_updated, is_deleted)
+- `med_request_items` - pasūtījumu rindas (id, request_id, client_id, order_date, doctor_name, medication_name, medication_form, lietosanas_laiki, is_deleted, last_updated)
 
-**Tehniskais atbalsts:**
-- E-pasts: davisstrazds@gmail.com
-- Tālrunis: +371 26482667
-- Darba laiks: Darbdienās 9:00-18:00
+**Klasifikatoru tabulas (MySQL):**
+- `diagnozes` - diagnožu saraksts (id, name, is_deleted, last_updated)
+- `medikamenti` - medikamentu saraksts (id, name, is_deleted, last_updated)
+- `medikamentu_formas` - medikamentu formas (id, name, is_deleted, last_updated)
+- `medikamentu_lietosanas_laiki` - lietošanas laiki (id, name, is_deleted, last_updated)
+- `arsti` - ģimenes ārsti (id, name, is_deleted, last_updated)
+- `psihiatri` - psihiatri (id, name, is_deleted, last_updated)
+- `invaliditates_grupas` - invaliditātes grupas (id, name, is_deleted, last_updated)
 
-**Narkotiku un psihotropo vielu valsts dienests:**
-- Tālrunis: 67031234
-- Mājas lapa: www.nvpd.gov.lv
+### Pielikums C: Medicīniskie kontrolieri
 
-**Valsts medicīnas komisija:**
-- Tālrunis: 67045555
-- Mājas lapa: www.vmk.gov.lv
+**Galvenie kontrolieri:**
+- `HealthFormController` - veselības kartes skats
+- `HospitalFormController` - veidlapas slimnīcai
+- `MedRequestCenterController` - medikamentu pasūtījumu centrs
+- `MedicalAnalysisCenterController` - medicīniskā statistika
+
+**Datu repozitoriji:**
+- `HealthCardRepository` - veselības kartes dati
+- `MedRequestRepository` - medikamentu pasūtījumi
 
 ---
 
@@ -638,4 +728,4 @@ Ja sastopat tehnisku problēmu:
 
 Šī rokasgrāmata ir paredzēta medicīniskajam personālam un satur konfidenciālu informāciju. Tās izplatīšana bez atļaujas ir aizliegta.
 
-*Pēdējoreiz atjaunināts: 2024. gada 15. janvārī*
+*Pēdējoreiz atjaunināts: 2026. gada 5. martā*
