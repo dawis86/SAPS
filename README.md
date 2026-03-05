@@ -305,5 +305,3 @@ Pilna dokumentācija ir pieejama mapē `DOKUMENTACIJA/`:
 - MySQL atbalsts
 
 ---
-
-**Paldien, ka izvēlējāties Klientu Reģistrs!** 🎯

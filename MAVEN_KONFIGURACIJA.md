@@ -121,5 +121,3 @@ mvn javafx:run
 ```
 
 ---
-
-**Šī ir 100% precīza Maven konfigurācijas dokumentācija, kas atspoguļo faktisko POM failu!** 🎯

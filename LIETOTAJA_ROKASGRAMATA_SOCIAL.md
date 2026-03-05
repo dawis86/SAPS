@@ -1,4 +1,4 @@
-# Klientu Reģistrs - Sociālā darbinieka rokasgrāmata (100% Realitāte)
+# Klientu Reģistrs - Sociālā darbinieka rokasgrāmata
 
 **Versija:** 2.1.0  
 **Loma:** Sociālais darbinieks (SOCIAL_WORKER, SOCIAL_CAREGIVER)  
@@ -728,7 +728,3 @@
 - **`naudas_transakcijas`** - naudas transakcijas
 
 ---
-
-**Šī ir 100% precīza sociālā darbinieka rokasgrāmata, kas atspoguļo faktisko FXML un MySQL struktūru!** 🎯
-
-**Nav neviena izdomāta datuma - viss ir tieši no jūsu FXML failiem!**

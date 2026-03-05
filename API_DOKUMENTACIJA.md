@@ -632,17 +632,3 @@ public class LoggingService {
 - **`configuration`** - konfigurācija
 
 ---
-
-**Šī ir 100% precīza API dokumentācija, kas atspogujo faktisko JavaFX aplikācijas struktūru!** 🎯
-
-**Visi elementi ir faktiski un atbilst jūsu kodam:**
-- ✅ **Faktiskās JavaFX Controller metodes** - visas onAction metodes no FXML
-- ✅ **Faktiskie servisi** - AppDataService, DatabaseService, SecurityService, RepositoryService
-- ✅ **Faktiskie repozitoriji** - visi repozitoriji ar reālām CRUD operācijām
-- ✅ **Faktiskās datu entītijas** - Klients, PlanData, ActivityRecord, User
-- ✅ **Faktiskās komunikācijas plūsmas** - UI → Controller → Service → Repository → Database
-- ✅ **Faktiskās autentifikācijas** - SessionManager, CryptoUtils, AuditLogRepository
-- ✅ **Nav neviena REST API** - šī ir JavaFX desktop aplikācija
-- ✅ **Nav neviena izdomāti API endpointi** - visas metodes ir no faktiskā Java kodu
-
-**Jūsu sistēmas API dokumentācija tagad ir gatava komerciālai pārdošanai!** 🎯

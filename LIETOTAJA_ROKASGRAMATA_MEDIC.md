@@ -724,8 +724,4 @@ Ja sastopat tehnisku problēmu:
 
 **Dokumenta beigas**
 
-© 2024 Dāvis Strazds. Visas tiesības aizsargātas.
-
-Šī rokasgrāmata ir paredzēta medicīniskajam personālam un satur konfidenciālu informāciju. Tās izplatīšana bez atļaujas ir aizliegta.
-
-*Pēdējoreiz atjaunināts: 2026. gada 5. martā*
+© 2026 Dāvis Strazds. Visas tiesības aizsargātas.
