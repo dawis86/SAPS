@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -25,7 +25,7 @@
 
 ### 1.1. Arhitektūra (faktiskā)
 
-**Klientu Reģistrs** ir JavaFX desktop aplikācija ar klientu-servera arhitektūru:
+**Klientu Reģistrs** ir JavaFX darbvirsmas lietojumprogramma ar hibrīda datu piekļuves modeli:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐

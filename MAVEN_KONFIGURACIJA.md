@@ -1,9 +1,9 @@
-# Klientu Reģistrs - Maven Konfigurācija
+# Klientu Reģistrs - Maven Konfigurācija (Saskaņota)
 
-**Versija:** 2.0.0  
+**Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -11,7 +11,7 @@
 
 **GroupId:** lv.socialcare  
 **ArtifactId:** klientu-aprupes-sistema-parent  
-**Version:** 2.0.0  
+**Version:** 2.1.0  
 **Packaging:** pom  
 **MainClass:** lv.socialcare.Launcher  
 
@@ -24,6 +24,7 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.release>21</maven.compiler.release>
+    <sqlite.version>3.45.1.0</sqlite.version>
     
     <javafx.version>21.0.2</javafx.version>
     <slf4j.version>2.0.13</slf4j.version>
@@ -31,7 +32,6 @@
     <gson.version>2.10.1</gson.version>
     <hikarcp.version>5.1.0</hikarcp.version>
     <mysql.version>8.4.0</mysql.version>
-    <h2.version>2.2.224</h2.version>
     <junit.version>5.10.2</junit.version>
     <mockito.version>5.12.0</mockito.version>
 </properties>
@@ -57,10 +57,11 @@
 ### Datu bāzes
 - HikariCP 5.1.0
 - MySQL Connector 8.4.0
-- H2 Database 2.2.224
+- SQLite JDBC 3.45.1.0 (Offline Cache)
 
 ### Utilīti
 - Gson 2.10.1
+- ControlsFX 11.2.1
 
 ### Testēšana
 - JUnit 5.10.2

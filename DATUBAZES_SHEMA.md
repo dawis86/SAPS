@@ -4,7 +4,7 @@
 **Statuss:** PRODUKCIJAS GATAVS  
 **Datu bāzes versija:** v5.0  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -12,7 +12,7 @@
 
 ### Datu bāzu tipi:
 - **MySQL 8.0+** (servera pase)
-- **SQLite 3.x** (lokālā pase)
+- **SQLite 3.x** (lokālā puse, bezsaistes buferis)
 
 ### Adapteri:
 - **MySQLAdapter** - MySQL specifiskās operācijas
@@ -651,6 +651,14 @@ CREATE TABLE `schema_versions` (
   `description` text,
   `checksum` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`version`)
+);
+
+CREATE TABLE `pending_changes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sql_command` text NOT NULL,
+  `params_json` text,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 );
 ```
 

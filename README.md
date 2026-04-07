@@ -3,13 +3,20 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
 ## Par projektu
 
-**Klientu Reģistrs** ir JavaFX desktop aplikācija, kas paredzēta sociālās aprūpes iestādēm klientu datu pārvaldībai. Aplikācija nodrošina pilnu klientu dzīves cikla pārvaldību, ieskaitot klienta karti, aprūpes plānus, medicīniskos datus, protokolus un citu svarīgu informāciju.
+**Klientu Reģistrs** ir JavaFX darbvirsmas lietojumprogramma, kas izstrādāta kā kvalifikācijas prakses darbs Dienvidkurzemes novada pašvaldības Sociālā atbalsta centra "Vaiņode" vajadzībām. 
+
+### Prakses mērķis
+Sistēmas pamatmērķis ir fundamentāli risināt sociālās aprūpes nozares birokrātiju, transformējot manuālos, papīra formāta procesus modernā, drošā un automatizētā digitālā risinājumā. Projekts pierāda spēju veikt pilnu programmatūras izstrādes ciklu, apvienojot profesionālo pieredzi sociālajā darbā ar modernām programmēšanas tehnoloģijām.
+
+### Galvenās inovācijas
+- **AI-Assisted Engineering**: Izstrādes procesā izmantoti mākslīgā intelekta rīki koda kvalitātes auditam un arhitektūras optimizācijai.
+- **Offline-First**: Hibrīda datu glabāšana (MySQL + SQLite) nepārtrauktam darbam bez interneta.
 
 ---
 
@@ -279,7 +286,7 @@ Pilna dokumentācija ir pieejama mapē `DOKUMENTACIJA/`:
 
 ## Autortiesības
 
-© 2024 Dāvis Strazds. Visas tiesības aizsargātas.
+© 2026 Dāvis Strazds. Visas tiesības aizsargātas.
 
 Šī programmatūra ir aizsargāta ar autortiesību likumiem un starptautiskiem līgumiem. Bez atļaujas ir aizliegts kopēt, modificēt, izplatīt vai izmantot šo programmatūru.
 
@@ -287,19 +294,19 @@ Pilna dokumentācija ir pieejama mapē `DOKUMENTACIJA/`:
 
 ## Pēdējie izmaiņu
 
-### Versija 2.1.0 (2026.03.05)
+### Versija 2.1.0 (2026.04.09)
 - Papildināta datu eksporta funkcionalitāte
 - Uzlabāta veiktspēja
 - Labota kļūdu apstrāde
 - Atjaunināta dokumentācija
 
-### Versija 2.0.0 (2025.12.01)
+### Versija 2.0.0 (2026.02.15)
 - Jauna licences sistēma
 - Papildināta drošība
 - Jauna UI dizains
 - SQLite atbalsts
 
-### Versija 1.0.0 (2024.06.15)
+### Versija 1.0.0 (2026.01.10)
 - Pirmā publiskā versija
 - Pamata funkcionalitāte
 - MySQL atbalsts

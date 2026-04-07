@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -22,7 +22,8 @@
 
 ### 1.1. Build sistēma (faktiskā)
 
-**Build rīks:** PowerShell + jpackage (Java 21+)
+**Izstrādes vide:** Visual Studio Code  
+**Build rīks:** Apache Maven + PowerShell skripti mērķa izplatīšanai (jpackage)
 
 **Mērķis:** Izveidot Windows .exe failus no Java JAR failiem
 
@@ -54,7 +55,7 @@
 ```powershell
 # 1. PROGRAMMA: KLIENTU REĢISTRS
 $app1_Name       = "KlientuRegistrs"
-$app1_Jar        = "C:\Build\KlientuAprupesSistema-2.0.0.jar"
+$app1_Jar        = "C:\Build\KlientuAprupesSistema-2.1.0.jar"
 $app1_Icon       = "C:\Build\logoDS.ico"
 $app1_MainClass  = "lv.socialcare.Launcher"
 $app1_Dest       = "C:\Build_Final"
@@ -139,7 +140,7 @@ function Build-Exe {
         "--main-class", $MainClass,
         "--java-options", "-Dfile.encoding=UTF-8 -Xms256m -Xmx1024m",
         "--vendor", "Davis Strazds",
-        "--app-version", "2.0.0",
+        "--app-version", "2.1.0",
         "--description", $Description,
         "--copyright", "© 2026 Davis Strazds"
     )
@@ -262,7 +263,7 @@ C:\Build_Final\
     │       ├── [Java bibliotēkas]
     │       └── [JAR fails]
     └── app\
-        └── KlientuAprupesSistema-2.0.0.jar
+        └── KlientuAprupesSistema-2.1.0.jar
 ```
 
 ### 5.2. Build_Licence_Final mape (faktiskā)
@@ -277,7 +278,7 @@ C:\Build_Licence_Final\
     │   ├── legal\
     │   └── lib\
     └── app\
-        └── LicenseGenerator-2.0.0.jar
+        └── LicenseGenerator-2.1.0.jar
 ```
 
 ### 5.3. Runtime struktūra

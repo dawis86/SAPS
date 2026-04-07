@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAPS v2.1.0 | Kvalifikācijas Prakses Aizstāvēšana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="prezentacija.css">
+</head>
+<body>
+
+<div id="lightbox" onclick="this.style.display='none'"><img src="" alt="Pietuvināts skats"></div>
+
+<div class="presentation-container">
+    <div id="progressBar"></div>
+    <main class="slide-viewer">
+        <!-- 1. Prakses Pārskats (Oficiālais) -->
+        <section class="slide active title-slide" id="slide-1">
+            <div class="stagger s-1">
+                <div class="badge">KVALIFIKĀCIJAS DARBA AIZSTĀVĒŠANA</div>
+                <h3 style="letter-spacing: 8px; margin-bottom: 1vh; color: var(--text-dim);">PRAKSES PĀRSKATS</h3>
+                <h1 style="font-size: clamp(4rem, 15vh, 8rem); margin: 0; line-height: 0.9;">SAPS</h1>
+                <h3 style="color: #fff; letter-spacing: 2px; margin-top: 1vh; font-weight: 300;">SOCIĀLĀS APRŪPES VADĪBAS SISTĒMA</h3>
+            </div>
+            
+            <div class="stagger s-2" style="margin-top: 6vh; border-top: 1px solid var(--accent); padding-top: 4vh; display: inline-block;">
+                <div style="font-size: 2.8rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px;">Dāvis Strazds</div>
+                <div style="font-size: 1.4rem; color: var(--text-dim); letter-spacing: 5px; text-transform: uppercase; font-weight: 300;">Programmēšanas TEHNIĶIS</div>
+            </div>
+
+            <div class="tech-tags stagger s-3" style="justify-content: center; margin-top: 8vh; opacity: 0.5;">
+                <span class="tech-tag">TEHNOLOĢIJAS CILVĒKA LABĀ</span>
+            </div>
+        </section>
+
+        <!-- 2. Prakses Mērķis (Akadēmiskais) -->
+        <section class="slide" id="slide-2">
+            <header class="slide-header"><h2>MISIJA: TEHNOLOĢIJA CILVĒKAM</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/cikls_programmesana.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Kāpēc tas ir svarīgi?</h3>
+                    <ul>
+                        <li><strong>Pieredzes sinerģija:</strong> 13 gadi sociālajā darbā sastopas ar modernu programmēšanu.</li>
+                        <li><strong>Mērķis:</strong> Radīt rīku, kas nevis sarežģī, bet atvieglo speciālista ikdienu.</li>
+                        <li><strong>Jēga:</strong> Atgriezt sociālajam darbiniekam laiku, ko šobrīd atņem birokrātija.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. SAPS Sistēmas Mērķis (Praktiskais) -->
+        <section class="slide" id="slide-3">
+            <header class="slide-header"><h2>SISTĒMAS (SAPS) MISIJA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Process_uzlabojums.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Vairāk nekā tikai programma</h3>
+                    <ul>
+                        <li><strong>Cieņa pret speciālistu:</strong> Likvidēt bezjēdzīgu datu pārrakstīšanu no viena papīra otrā.</li>
+                        <li><strong>Darbības ātrums:</strong> Viena klikšķa automatizācija, lai sekunde kalpotu darbiniekam.</li>
+                        <li><strong>Drošības sajūta:</strong> Centralizēta informācija, kas vienmēr ir pieejama un droša.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 4. Jauns slaids: Procesa Optimizācija (Cilvēciskais faktors) -->
+        <section class="slide" id="slide-4">
+            <header class="slide-header"><h2>PROCESA OPTIMIZĀCIJA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <img src="img/Process_uzlabojums.png" class="gallery-img active">
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Dārgākais resurss — Laiks</h3>
+                    <div class="infographic-box">
+                        <p class="old-way">PIRMS SAPS: 40-60 minūtes</p>
+                        <p class="sub-text">(Nogurdinoša papīru kalnu šķirstīšana un labošana)</p>
+                        <div class="arrow-down"><i class="fas fa-long-arrow-alt-down"></i></div>
+                        <p class="new-way">AR SAPS: 2-5 minūtes</p>
+                        <p class="sub-text">(Miers, precizitāte un gatavs rezultāts tūlīt)</p>
+                    </div>
+                    <ul>
+                        <li><strong>Atbrīvots laiks:</strong> Iespēja veltīt uzmanību cilvēkam, nevis veidlapai.</li>
+                        <li><strong>Kļūdu miers:</strong> Automatizācija izslēdz noguruma radītas kļūdas.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 5. Prakses vieta - SAC Vaiņode -->
+        <section class="slide" id="slide-5">
+            <header class="slide-header"><h2>KONTEKSTS: SAC "VAIŅODE"</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Prototips_sac_progr.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Kur SAPS maina ikdienu?</h3>
+                    <ul>
+                        <li><strong>SAC "Vaiņode":</strong> Vieta, kur rūpes par senioriem ir galvenā vērtība.</li>
+                        <li><strong>Komanda:</strong> Darbinieki, kuriem SAPS kļūst par uzticamu asistentu.</li>
+                        <li><strong>Risinājums:</strong> No sadrumstalotiem failiem uz vienotu, gudru ekosistēmu.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 6. Tehnoloģiskā Stēka Izvēle -->
+        <section class="slide" id="slide-6">
+            <header class="slide-header"><h2>STABILS UN DROŠS PAMATS</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 85%; color: white;">
+                        <div style="background: #111; padding: 25px; border: 1px solid var(--accent); text-align: center; border-radius: 8px; color: white;"><strong style="color: var(--accent);">DROŠĪBA</strong><br><small>Nākotnes standartiem atbilstoša</small></div>
+                        <div style="background: #111; padding: 25px; border: 1px solid var(--accent); text-align: center; border-radius: 8px; color: white;"><strong style="color: var(--accent);">VIENKĀRŠĪBA</strong><br><small>Intuitīva un draudzīga saskarne</small></div>
+                        <div style="background: #111; padding: 25px; border: 1px solid var(--accent); text-align: center; border-radius: 8px; color: white;"><strong style="color: var(--accent);">ATMIŅA</strong><br><small>Nekas nekur nepazūd</small></div>
+                        <div style="background: #111; padding: 25px; border: 1px solid var(--accent); text-align: center; border-radius: 8px; color: white;"><strong style="color: var(--accent);">NEPĀRTRAUKTĪBA</strong><br><small>Darbs turpinās arī bez interneta</small></div>
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Kāpēc tieši šie rīki?</h3>
+                    <ul>
+                        <li><strong>Stabilitāte:</strong> Sistēma, kas kalpos gadiem ilgi bez pārrāvumiem.</li>
+                        <li><strong>Mobilitāte:</strong> Darbinieks var strādāt jebkurā nodaļā, arī bez tīkla.</li>
+                        <li><strong>Vienotība:</strong> SAPS runā vienā valodā ar valsts noteiktajām Excel formām.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 7. Arhitektūra -->
+        <section class="slide" id="slide-7">
+            <header class="slide-header"><h2>REĀLĀ DARBA PLŪSMA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <img src="img/Pilnveidota_SAPS_Programma.png" class="gallery-img active" style="width: 80%;">
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Sakārtota sistēma — sakārtots darbs</h3>
+                    <ul>
+                        <li><strong>Nodalītas atbildības:</strong> Katrs speciālists redz un dara tikai savu jomu.</li>
+                        <li><strong>Datu sinhronitāte:</strong> Izmaiņas vienā vietā uzreiz atjaunojas visā sistēmā.</li>
+                        <li><strong>Gudrā glabāšana:</strong> Informācija ir strukturēta tieši tā, kā to prasa cilvēka prāts.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 8. Galvenais vadības panelis -->
+        <section class="slide" id="slide-8">
+            <header class="slide-header"><h2>VADĪBAS CENTRS (HUB)</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Galvenais_skats.png" class="gallery-img active">
+                        <img src="img/Galvena_izvelne_1.png" class="gallery-img">
+                        <img src="img/Galvena_izvelne_2.png" class="gallery-img">
+                        <img src="img/Galvena_izvelne_3.png" class="gallery-img">
+                        <img src="img/Galvena_izvelne_4.png" class="gallery-img">
+                        <img src="img/Galvena_izvelne_5.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Diena sākas ar mieru</h3>
+                    <ul>
+                        <li><strong>Pārskatāmība:</strong> Sistēma pati atgādina par steidzamiem termiņiem.</li>
+                        <li><strong>Kontrole:</strong> Reāllaika ziņas par to, kas iestādē notiek šobrīd.</li>
+                        <li><strong>Lomu pasaule:</strong> Katram darbiniekam sava pasaule, bez lieka informācijas trokšņa.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 9. Klientu Reģistrs -->
+        <section class="slide" id="slide-9">
+            <header class="slide-header"><h2>KLIENTU PĀRVALDĪBAS MODULIS</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/KlientuRegistrs.png" class="gallery-img active">
+                        <img src="img/Aktualo klientu saraksts.png" class="gallery-img">
+                        <img src="img/Jauns_klients.png" class="gallery-img">
+
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Cilvēks aiz skaitļiem</h3>
+                    <ul>
+                        <li><strong>Precizitāte:</strong> Sistēma neļauj kļūdīties svarīgos datos (PK, termiņi).</li>
+                        <li><strong>Ātrums:</strong> Atrodi vajadzīgo klientu sekunžu laikā, nevis minūtēs.</li>
+                        <li><strong>Gudrība:</strong> Automātiska statusu maiņa un vēstures saglabāšana.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 10. Klienta Karte: Personas dati -->
+        <section class="slide" id="slide-10">
+            <header class="slide-header"><h2>PERSONAS DATU DIGITALIZĀCIJA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Klienta Karte_Karte_Dokumenti.png"  class="gallery-img active">
+                        <img src="img/Klienta Karte_Karte_Personas dati.png" class="gallery-img active">
+                        <img src="img/Klienta Karte_Karte_Sociala un izglitiba.png" class="gallery-img active">
+                        <img src="img/Klienta Karte_Karte_Veseliba un parvietosanas.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Digitālais dzīvesstāsts</h3>
+                    <ul>
+                        <li><strong>Stāsts vienuviet:</strong> No pirmās iestāšanās dienas līdz šodienai.</li>
+                        <li><strong>Sociālā būtība:</strong> Ne tikai dati, bet cilvēka izglītība, pieredze un talanti.</li>
+                        <li><strong>Cieņa:</strong> Informācija, kas palīdz labāk saprast klienta personību.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 11. Ģimene un Kontakti -->
+        <section class="slide" id="slide-11">
+            <header class="slide-header"><h2>SOCIĀLAIS ATBALSTA TĪKLS</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Klienta Karte_Karte_Gimene un kontakti.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Svarīgās saites</h3>
+                    <ul>
+                        <li><strong>Tuvinieki:</strong> Ātra saikne ar tiem, kuri klientam ir visdārgākie.</li>
+                        <li><strong>Attiecību vēsture:</strong> Zināšanas par to, kurš un kad ir apciemojis klientu.</li>
+                        <li><strong>Uzticība:</strong> Katrs kontakts ir fiksēts un pieejams komandai.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 12. Dzīves kvalitāte -->
+        <section class="slide" id="slide-12">
+            <header class="slide-header"><h2>DZĪVES KVALITĀTE UN INTERESES</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Klienta Karte_Karte_Intereses un cits.png" class="gallery-img active">
+                        <img src="img/Klienta Karte_Karte_Administrativa info.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Ieklausīšanās vēlmēs</h3>
+                    <ul>
+                        <li><strong>Hobiji:</strong> Zināšanas, kas palīdz iepriecināt un motivēt klientu.</li>
+                        <li><strong>Ieradumi:</strong> Sīkumi (ēdiens, ticība), kas veido klienta komfortu.</li>
+                        <li><strong>Uzmanība:</strong> SAPS palīdz neaizmirst par klienta individuālajām vajadzībām.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 13. Medicīniskais bloks -->
+        <section class="slide" id="slide-13">
+            <header class="slide-header"><h2>MEDICĪNISKĀ UZRAUDZĪBA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/VeselibasKarte.png" class="gallery-img active">
+                        <img src="img/Klienta Karte_Karte_Veseliba un parvietosanas.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Rūpes par veselību</h3>
+                    <ul>
+                        <li><strong>Gudrā Anamnēze:</strong> Visa medicīniskā vēsture sakārtota un pārskatāma.</li>
+                        <li><strong>Sadarbība:</strong> Efektīva informācijas apmaiņa ar ārstiem un psihiatriem.</li>
+                        <li><strong>Drošība:</strong> Palīglīdzekļu un kustību monitorings klienta pasargāšanai.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 14. Medikamentu automatizācija -->
+        <section class="slide" id="slide-14">
+            <header class="slide-header"><h2>MEDIKAMENTU PĀRVALDĪBA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/MedikamentuPasutijums.png" class="gallery-img active">
+                        <img src="img/Veidlapa slimnicai.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Miers un Drošība</h3>
+                    <ul>
+                        <li><strong>Bez kļūdām:</strong> Automatizēti pasūtījumi izslēdz manuālas pārrakstīšanas riskus.</li>
+                        <li><strong>Ātrā palīdzība:</strong> Dokumenti slimnīcai ir gatavi tūlītēji, bez kavēšanās.</li>
+                        <li><strong>Rūpīgums:</strong> Medikamentu devas un laiki ir precīzi fiksēti sistēmā.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 15. Sociālā rehabilitācija -->
+        <section class="slide" id="slide-15">
+            <header class="slide-header"><h2>SOCIĀLĀ REHABILITĀCIJA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/nod_zurn.png" class="gallery-img active">
+                        <img src="img/Nodarbību registracijas zurnals.png" class="gallery-img">
+                        <img src="img/Pievienot_aktivitati.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Katra diena ir svarīga</h3>
+                    <ul>
+                        <li><strong>Motivācija:</strong> Fiksējam ne tikai faktu, bet klienta emocijas un progresu.</li>
+                        <li><strong>Personalizācija:</strong> Mērķi, kas pielāgoti tieši šim cilvēkam un viņa spējām.</li>
+                        <li><strong>Rezultāts:</strong> Skaidrs redzējums, kā klients jūtas un attīstās SAC vidē.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 16. Dokumentu Automatizācija -->
+        <section class="slide" id="slide-16">
+            <header class="slide-header"><h2>EXCEL INTEGRĀCIJA (MK #138)</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Sociālās aprūpes plāna veidlapa.png" class="gallery-img active">
+                        <img src="img/Klienta Karte_Karte_Dokumenti.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Atvieglojums speciālistam</h3>
+                    <ul>
+                        <li><strong>Gudrie dokumenti:</strong> SAPS aizpilda sarežģītas veidlapas speciālista vietā.</li>
+                        <li><strong>Miers no papīriem:</strong> Beidzam meklēt, pārrakstīt un svītrot. Tikai klikšķis.</li>
+                        <li><strong>Kvalitātes standarts:</strong> Visi dokumenti ir perfekti sakārtoti un vienmēr laikā.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 17. Statistika: Demogrāfija -->
+        <section class="slide" id="slide-17">
+            <header class="slide-header"><h2>DEMOGRĀFIJAS ANALĪTIKA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Demografija_statistika.png" class="gallery-img active">
+                        <img src="img/Statist_vecumasadalijums.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Izpratne par kopienu</h3>
+                    <ul>
+                        <li><strong>Redzējums:</strong> Diagrammas, kas palīdz saprast iestādes "dzīvību" un vajadzības.</li>
+                        <li><strong>Plānošana:</strong> Uz datiem balstīti lēmumi par darbinieku noslodzi un resursiem.</li>
+                        <li><strong>Skaidrība:</strong> Atskaites, kas runā valodā, kuru saprot vadība un kontroles institūcijas.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 18. Statistika: Nodarbības -->
+        <section class="slide" id="slide-18">
+            <header class="slide-header"><h2>REHABILITĀCIJAS REZULTĀTI</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Nodarbibu_analize_statistika_kopsavilkums.png" class="gallery-img active">
+                        <img src="img/Statist_nodarbibas_dinamika.png" class="gallery-img">
+                        <img src="img/Statist_nodarbibas_kopa.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Dinamiska Izaugsme</h3>
+                    <ul>
+                        <li><strong>Progresa mērījumi:</strong> Redzam reālu klienta pašsajūtas uzlabošanos mēnešu griezumā.</li>
+                        <li><strong>Komandas darbs:</strong> Pārskats par to, kā speciālistu darbs sasniedz rezultātu.</li>
+                        <li><strong>Jēgpilnas nodarbības:</strong> Saprotam, kas klientiem tiešām patīk un palīdz.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 19. Drošība un Audits -->
+        <section class="slide" id="slide-19">
+            <header class="slide-header"><h2>DROŠĪBA UN IDENTIFIKĀCIJA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Autorizacija_Klientu_registrs1.png" class="gallery-img active">
+                        <img src="img/Programmas_aizsardziba.png" class="gallery-img active">
+                        <img src="img/Autorizacija_Klientu_registrs3_aizmirsa_paroli.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Datu drošība un uzticība</h3>
+                    <ul>
+                        <li><strong>Privātums:</strong> Katrs darbinieks piekļūst tikai tam, kas nepieciešams viņa darbam.</li>
+                        <li><strong>Uzticamība:</strong> Katrs ieraksts ir parakstīts un fiksēts. Nekas nevar tikt nejauši dzēsts.</li>
+                        <li><strong>Aizsardzība:</strong> Dati ir šifrēti un pasargāti no svešām acīm.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 20. Administrators -->
+        <section class="slide" id="slide-20">
+            <header class="slide-header"><h2>ADMINISTRATORA EKOSISTĒMA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Admin_riki.png" class="gallery-img active">
+                        <img src="img/MySQL_savienojuma_iestatijumi.png" class="gallery-img">
+                        <img src="img/Administratora_paroles_iestatisana.png" class="gallery-img">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Miers un Stabilitāte</h3>
+                    <ul>
+                        <li><strong>Vienmēr darbībā:</strong> Rīki, kas nodrošina sistēmas nepārtrauktu un stabilu darbu.</li>
+                        <li><strong>Datu spogulis:</strong> Automatizētas rezerves kopijas, lai nekas nepazustu nekādā situācijā.</li>
+                        <li><strong>Pārredzamība:</strong> Skaidra kontrole pār sistēmas resursiem un lietotājiem.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 21. Inovācija -->
+        <section class="slide" id="slide-21">
+            <header class="slide-header"><h2>MODERNI RĪKI CILVĒKA LABĀ</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Pilnveidota_SAPS_Programma.png" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>Augstākā kvalitāte katrā rindā</h3>
+                    <ul>
+                        <li><strong>AI Audits:</strong> Katra funkcija ir pārbaudīta ar jaunākajiem AI rīkiem uz stabilitāti.</li>
+                        <li><strong>Gudrā izstrāde:</strong> Izmantoti industrijas standarti, lai sistēma būtu ātra un droša.</li>
+                        <li><strong>Rezultāts:</strong> Viens cilvēks, bet profesionālas komandas cienīgs, stabils risinājums.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 22. Secinājumi -->
+        <section class="slide" id="slide-22">
+            <header class="slide-header"><h2>SECINĀJUMI UN REĀLĀ VĒRTĪBA</h2></header>
+            <div class="slide-content">
+                <figure class="visual-area stagger s-1" onclick="zoomImage(this)">
+                    <div class="gallery-container">
+                        <img src="img/Vizit_LV.JPG" class="gallery-img active">
+                    </div>
+                </figure>
+                <article class="info-area stagger s-2">
+                    <h3>SAPS ir gatavs darbam</h3>
+                    <ul>
+                        <li><strong>Jēga:</strong> SAPS nav tikai kods, tas ir digitāls atbalsts reāliem cilvēkiem.</li>
+                        <li><strong>Ieguvums:</strong> Beidzot sociālais darbinieks var fokusēties uz klienta acīm, nevis papīru.</li>
+                        <li><strong>Nākotne:</strong> Pamats tālākai iestādes digitālajai attīstībai un kvalitātes celšanai.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 23. Paldies -->
+        <section class="slide title-slide" id="slide-23">
+            <h1>JAUTĀJUMI UN DISKUSIJA</h1>
+            <h3 style="margin-top: 30px;">PALDIES PAR UZMANĪBU</h3>
+            <div class="tech-tags" style="justify-content: center; margin-top: 5vh;">
+                <a href="mailto:davisstrazds@gmail.com" class="tech-tag" style="text-decoration: none;">
+    <i class="fas fa-envelope"></i> davisstrazds@gmail.com
+</a>
+                <a href="https://github.com/dawis86/SAPS" target="_blank" class="tech-tag" style="text-decoration: none;">GITHUB.COM/STRAZDS/SAPS</a>
+            </div>
+        </section>
+    </main>
+
+    <div class="technical-commentary">
+        <div class="logo-area">
+            <img src="img/logoDS.jpg" alt="Logo">
+        </div>
+        <div class="commentary-text" id="commentaryText">
+            Inicializēju aizstāvēšanas dzinēju...
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <div class="footer-side footer-left">
+            <button id="prevBtn" disabled><i class="fas fa-chevron-left"></i></button>
+        </div>
+        <div class="footer-name">DĀVIS STRAZDS | SAC VAIŅODE | 2026</div>
+        <div class="footer-side footer-right">
+            <span id="slideCounter" style="font-family: 'JetBrains Mono'; min-width: 80px; text-align: center;">01 / 23</span>
+            <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<script src="prezentacija.js"></script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Loma:** MEDICAL_STAFF  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -339,6 +339,7 @@ Jūsu loma (MEDICAL_STAFF) ļauj piekļūt:
 1. **Pārbaudiet datus:**
    - Klients (no klientu saraksta)
    - Personas kods un vecums (automātiski)
+   - Automātiska veidlapu aizpilde (Apache POI integrācija)
    - Invaliditātes grupa un numurs (no datubāzes)
    - Ģimenes ārsts un psihiatrs (no datubāzes)
    - Diagnozes (no "diagnozes" tabulas)

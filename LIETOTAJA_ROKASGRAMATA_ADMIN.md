@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Loma:** Sistēmas administrators (ADMIN)  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -62,6 +62,7 @@
 │ [Importēt papildu datus (.xlsx)]                         │
 │ [Dublēt datubāzi (Backup)]                               │
 │ [Atjaunot dzēstos klientus]                              │
+│ [Sinhronizēt bezsaistes datus]                           │
 │ [Atjaunot datubāzi (Restore)]                            │
 │ [Ātrais Tests (Root Access)]                            │
 │ [Iestatīt ZIP paroli]                                   │

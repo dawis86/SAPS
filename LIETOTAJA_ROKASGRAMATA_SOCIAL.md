@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Loma:** Sociālais darbinieks (SOCIAL_WORKER, SOCIAL_CAREGIVER)  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -114,7 +114,7 @@
 ### 3.1. Klienta karte (KarteView.fxml)
 
 **Faktiskā UI struktūra:**
-```
+Sistēma nodrošina automātisku sociālās aprūpes plānu ģenerēšanu un eksportu, fundamentāli samazinot papīra darbu apjomu.
 ┌─────────────────────────────────────────────────────────────┐
 │ [Eksportēt] [Labot] [Saglabāt] [Atcelt]                   │
 ├─────────────────────────────────────────────────────────────┤

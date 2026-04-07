@@ -1,0 +1,11 @@
+# IDE specifiskie faili
+.vscode/
+.idea/
+*.swp
+
+# Maven/Build rezultāti
+target/
+
+# Operētājsistēmas faili
+.DS_Store
+Thumbs.db

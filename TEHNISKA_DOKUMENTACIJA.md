@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -56,12 +56,13 @@
 
 ## 2. IZSTRĀDES VIDE
 
+### 2.0. Izstrādes metodoloģija (Prakses specifika)
+Projekts realizēts, izmantojot **AI-Assisted Software Engineering** pieeju. Tas ietver mākslīgā intelekta rīku integrāciju izstrādes procesā, veicot precīzu tehnisko uzdevumu formulēšanu (**Prompt Engineering**) un ģenerētā koda kvalitātes auditu, nodrošinot augstu stabilitāti un GDPA atbilstību.
+
 ### 2.1. Izstrādes rīki (faktiski)
 
 **IDE:**
-- **IntelliJ IDEA** 2023.3+
-- **Eclipse** 2023-12+
-- **VS Code** ar Java Extension Pack
+- **Visual Studio Code** (ar Java Extension Pack)
 
 **Build rīks:**
 - **Apache Maven 3.9.0+**
@@ -506,7 +507,7 @@ public void stop() throws Exception {
     try {
         ServiceRegistry registry = ServiceRegistry.getInstance();
         if (registry != null) {
-            // H2 Faila optimizācija
+            // SQLite Faila optimizācija
             if (appDataService != null && appDataService.getConnectionManager() != null) {
                 try (java.sql.Connection localConn = appDataService.getConnectionManager().getLocalConnection()) {
                     if (localConn != null && !localConn.isClosed()) {

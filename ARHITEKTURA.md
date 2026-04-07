@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -23,6 +23,13 @@
 
 ## 1. ARHITEKTŪRAS PĀRSKATS
 
+Šī sistēma izmanto **MVC (Model-View-Controller)** arhitektūras principu un modernu **Offline-First** pieeju, lai nodrošinātu darba nepārtrauktību.
+
+### 1.1. Galvenās arhitektūras komponentes
+- **Datu loģika**: Nodalīta caur modeļiem (Klients, ClientCardInfo).
+- **Vizuālais attēlojums**: Definēts .fxml failos.
+- **Vadība**: Specializēti kontrolieri (HubController, ClientCardController).
+
 ### 1.1. Arhitektūras diagramma (faktiskā)
 
 ```mermaid
@@ -37,12 +44,14 @@ graph TB
         AppDataService[AppDataService]
         DatabaseService[DatabaseService]
         SecurityService[SecurityService]
+        OfflineBuffer[OfflineBufferService]
         RepositoryService[RepositoryService]
         ImportExportService[ImportExportService]
     end
     
     subgraph "Datu piekļuves slānis"
         Repositories[Repository Pattern]
+        SchemaManager[SchemaManager]
         ConnectionManager[DatabaseConnectionManager]
         SchemaManager[SchemaManager]
         BackupManager[BackupManager]
@@ -50,13 +59,14 @@ graph TB
     
     subgraph "Datu slānis"
         MySQL[(MySQL Server)]
-        SQLite[(SQLite Local)]
+        LocalDB[(SQLite Local Cache)]
         FileSystem[File System]
     end
     
     UI --> Controllers
     Controllers --> AppDataService
     AppDataService --> DatabaseService
+    AppDataService --> OfflineBuffer
     AppDataService --> SecurityService
     AppDataService --> RepositoryService
     DatabaseService --> Repositories
@@ -84,7 +94,7 @@ graph TB
 **Datu piekļuves slānis:**
 - Repository Pattern implementācija
 - `DatabaseConnectionManager` - savienojumu pārvaldība
-- `SchemaManager` - datubāzes shēmas pārvaldība
+- `SchemaManager` - datubāzes shēmas un migrāciju pārvaldība (nodrošina MySQL/SQLite dialektu saderību)
 - `BackupManager` - rezerves kopiju pārvaldība
 
 ---

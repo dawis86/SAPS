@@ -3,7 +3,7 @@
 **Versija:** 2.1.0  
 **Statuss:** PRODUKCIJAS GATAVS  
 **Izstrādātājs:** Dāvis Strazds  
-**Pārbaudīts:** 2026.03.05  
+**Pārbaudīts:** 2026.04.09  
 
 ---
 
@@ -90,6 +90,14 @@ public class Main extends Application {
     public LicenseManager getLicenseManager()
     public ExcelManager getExcelManager()
     public MySQLConfig getMySQLConfig()
+    
+    // Sistēmas pārvaldības API
+    public SchemaManager getSchemaManager()
+    public OfflineBufferService getOfflineBufferService()
+}
+
+public class SchemaManager {
+    public void applyMigrations() // Automātiska DB struktūras atjaunināšana un dialektu saderības nodrošināšana (MySQL/SQLite)
 }
 ```
 
